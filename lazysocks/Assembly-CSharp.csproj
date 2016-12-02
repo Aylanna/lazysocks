@@ -50,9 +50,11 @@
      <Compile Include="Assets\Scripts\GUI\StartMenu.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\WhackAMoleScripts\Hole.cs" />
-     <Compile Include="Assets\Scripts\WhackAMoleScripts\Mole.cs" />
-     <Compile Include="Assets\Scripts\WhackAMoleScripts\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\WhackAMoleScripts\Hit.cs" />
+     <Compile Include="Assets\Scripts\WhackAMoleScripts\Score.cs" />
+     <Compile Include="Assets\Scripts\WhackAMoleScripts\ScoreResult.cs" />
+     <Compile Include="Assets\Scripts\WhackAMoleScripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\WhackAMoleScripts\TimeOut.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
