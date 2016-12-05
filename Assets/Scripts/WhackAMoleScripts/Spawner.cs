@@ -120,19 +120,19 @@ public class Spawner : MonoBehaviour
         float z = -1.3f;
 
         // Top row
-        spawnPoints[0] = new Vector3(-1.97f, 2.7f, z);
-        spawnPoints[1] = new Vector3(0.1f, 2.7f, z);
-        spawnPoints[2] = new Vector3(2.1f, 2.7f, z);
+        spawnPoints[0] = new Vector3(-10f, 15f, z);
+        spawnPoints[1] = new Vector3(0f, 15f, z);
+        spawnPoints[2] = new Vector3(10f, 15f, z);
 
         //Middle row
-        spawnPoints[3] = new Vector3(-1.97f, -0.42f, z);
-        spawnPoints[4] = new Vector3(0.1f, -0.42f, z);
-        spawnPoints[5] = new Vector3(2.1f, -0.42f, z);
+        spawnPoints[3] = new Vector3(-10f, -0.5f, z);
+        spawnPoints[4] = new Vector3(0f, -0.5f, z);
+        spawnPoints[5] = new Vector3(10f, -0.5f, z);
 
         //Bottom row
-        spawnPoints[6] = new Vector3(-1.97f, -3.49f, z);
-        spawnPoints[7] = new Vector3(0.1f, -3.49f, z);
-        spawnPoints[8] = new Vector3(2.1f, -3.49f, z);
+        spawnPoints[6] = new Vector3(-10f, -15.6f, z);
+        spawnPoints[7] = new Vector3(0f, -15.6f, z);
+        spawnPoints[8] = new Vector3(10f, -15.6f, z);
     }
 
     private void SpawnCharacter()
