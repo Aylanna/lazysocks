@@ -6,7 +6,7 @@ public class StartMenu : MonoBehaviour {
 
     public Canvas selectCharacter;
     public Canvas start;
-    public Canvas rollTheDie;
+    public Canvas rollTheDice;
 
     private PlayerController player;
     private GameController controller;
@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour {
 
         controller = GetComponent<GameController>();
         selectCharacter.GetComponent<Canvas>().enabled = false;
-        rollTheDie.GetComponent<Canvas>().enabled = false;
+        rollTheDice.GetComponent<Canvas>().enabled = false;
         numbersOfPlayers = start.GetComponent<Canvas>().GetComponentsInChildren<Toggle>();
         foreach (Toggle t in numbersOfPlayers)
         {
