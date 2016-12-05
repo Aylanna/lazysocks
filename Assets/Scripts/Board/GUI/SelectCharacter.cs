@@ -24,14 +24,14 @@ public class SelectCharacter : MonoBehaviour {
 
     void Update()
     {
-        if (counter > controller.numbersOfPlayers && isDice)
-        {
-			selectCharacter.GetComponent<Canvas>().enabled = false;
-            controller.state = 1;
+        //if (counter > controller.numbersOfPlayers && isDice)
+       // {
+		//	selectCharacter.GetComponent<Canvas>().enabled = false;
+        //    controller.state = 1;
             
-        }
-        if (controller.numbersOfPlayers > 0)
-            isDice = true;
+       // }
+       // if (controller.numbersOfPlayers > 0)
+        //    isDice = true;
     
        
         
@@ -64,6 +64,12 @@ public class SelectCharacter : MonoBehaviour {
         IsCharacterToggleActive();
         messageText.text = "Player " + counter;
         SetToggleNotActive();  
+		if (counter > controller.numbersOfPlayers)
+		{
+			selectCharacter.GetComponent<Canvas>().enabled = false;
+			controller.state = 1;
+
+		}
            
     }
 }

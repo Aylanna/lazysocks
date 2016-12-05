@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
    public Canvas rollADice;
    // public int playerIDMovement;
     public int playerIDDice;
+	public int playerIDMovement;
     public int diceValue;
     public GameObject activePlayer; 
     public int state = 0;
@@ -34,35 +35,54 @@ public class GameController : MonoBehaviour {
                 break;
             case 1:
                 if(playerIDDice < numbersOfPlayers) {
-                 
                     rollADice.GetComponent<Canvas>().enabled = true;
-                    activePlayer = players[playerIDDice];
-                    dice.messageText.text = activePlayer.GetComponent<PlayerController>().playerName;
-                    
-                   orderOfPlayer[playerIDDice] = activePlayer;
+					activePlayer = players [playerIDDice];
+					dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
+					if (isDice) {
+						orderOfPlayer [playerIDDice] = activePlayer;
+						playerIDDice++;
+						isDice = false;
+					}
                 }
                 else
                 {
-                    Invoke("SetDiceCanvasInactive", 1);
+				
+                  //  Invoke("SetDiceCanvasInactive", 1);
+				rollADice.GetComponent<Canvas> ().enabled = false;
                     SortOrderOfPlayers();
-                    TestPlayerOrder();
-                  //  playerIDDice = 0;
+                   // TestPlayerOrder();
+					playerIDDice = 0;
+					isDice = false;
                     state = 2;
                 }
                 break;
-            case 2:
-              //  activePlayer = orderOfPlayer[playerIDDice];
-              //  rollADice.GetComponent<Canvas>().enabled = true;
-             //   dice.messageText.text = activePlayer.GetComponent<PlayerController>().playerName;
-             //   Invoke("SetDiceCanvasInactive", 1);
-             //   state = 3;
+		case 2:
+			
+			activePlayer = orderOfPlayer [playerIDDice];
+			Debug.Log ("order " + orderOfPlayer.Length + " " + "ID " + playerIDDice);
+			rollADice.GetComponent<Canvas> ().enabled = true;
+			dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
+
+			if (isDice) {
+				Invoke ("SetDiceCanvasInactive", 1);
+				isDice = false;
+				state = 3;
+			}
                 break;
-            case 3:
-                
+		case 3:
+			Debug.Log ("Player moves " + activePlayer.GetComponent<PlayerController> ().playerName);
+			Debug.Log ("Player Field interaction " + activePlayer.GetComponent<PlayerController> ().playerName);
+			if (playerIDDice < orderOfPlayer.Length) {
+				//Debug.Log ("ID " + playerIDDice);
+				playerIDDice++;
+				state = 2;
+			} else {
+				state = 4;
+			}
                 //Player move
                 // player interact
                 //for now:
-                state = 2;
+               
                 break;
             case 4:
                 //move activePlayer

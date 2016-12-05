@@ -21,14 +21,10 @@ public class Dice : MonoBehaviour {
         }
     }
 
-    void OnAwake()
-    {
-        //messageText.text = controller.activePlayer.GetComponent<PlayerController>().playerName;
-    }
+   
    
     public void RollDice()
     {
-       // messageText.text = controller.activePlayer.GetComponent<PlayerController>().playerName;
         int index = Random.Range(1, 7);
         dice.interactable = true;
         switch(index)
@@ -52,9 +48,13 @@ public class Dice : MonoBehaviour {
                 dice.image.sprite = sprites[5];
                 break;
         }
-        
-        controller.activePlayer.GetComponent<PlayerController>().SetDiceValue(index);
-        controller.playerIDDice++;
+		controller.isDice = true;
+		if(controller.activePlayer != null)
+        	controller.activePlayer.GetComponent<PlayerController>().SetDiceValue(index);
+
+		//if (controller.playerIDDice >= controller.numbersOfPlayers) {
+		//	controller.playerIDDice = 0;
+	//	}
        
 
 
