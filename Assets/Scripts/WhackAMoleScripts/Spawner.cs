@@ -3,26 +3,33 @@ using System.Collections;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
+/// <summary>
+/// This class contains various methods to make sure the characters would spawn at certain spawnpoints, within a certain time and
+/// includes behavior what happenes when an character is pressed a good one increases the score and a bad one concludes game over.
+///
+/// @author: Nick Oosterhuis
+/// </summary>
 public class Spawner : MonoBehaviour
 {
-    public GameObject good;
-    public GameObject bad;
+    [SerializeField] private GameObject good;
+    [SerializeField] private GameObject bad;
 
     public Vector3[] spawnPoints;
     public bool[] taken;
 
-
     private bool startTimer;
-    private float timeLeft;
+    public static float timeLeft;
 
     public static int spawnNum;
     public static float timer;
+
     private int takenCounter;
     public static string playName;
     public static float removeTimer;
 
     public static bool isTapped = true;
-    public static bool check = false;
+    public static bool check;
+
 
     // Use this for initialization
 	private void Start () {
@@ -48,25 +55,11 @@ public class Spawner : MonoBehaviour
 
 	    if (!startTimer)
 	    {
-	        if (!isTapped)
-	        {
-	            //SceneManager.LoadScene("GameOver");
-	        }
-
 	        if (check)
 	        {
-	            Debug.Log("Check == true!");
 	            if (playName == "Good")
 	            {
 	                Score.score++;
-	            }
-	            if (playName == "Bad")
-	            {
-	                Score.score--;
-	            }
-	            if (Score.score < 0)
-	            {
-	                StartCoroutine(PauseBeforeGameOver());
 	            }
 
 	            check = false;
@@ -85,9 +78,12 @@ public class Spawner : MonoBehaviour
 	    }
 	}
 
+    /**
+    * methods resets the values of the variables
+    */
     private void ResetValues()
     {
-        timeLeft = 2.0f;
+        timeLeft = 3.0f;
         startTimer = true;
         isTapped = true;
         check = false;
@@ -97,7 +93,9 @@ public class Spawner : MonoBehaviour
         takenCounter = 0;
         removeTimer = 1.5f;
     }
-
+    /**
+     * Pause before spawning a new character (hand or tentacle)
+     */
     protected IEnumerator PauseBeforeNewCharacter()
     {
         yield return new WaitForSeconds(0.2f);
@@ -105,13 +103,9 @@ public class Spawner : MonoBehaviour
         SpawnCharacter();
     }
 
-    protected IEnumerator PauseBeforeGameOver()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("KEEEEEEEEEEEEEK GAME OVER");
-        //SceneManager.LoadScene("GameOver");
-    }
-
+    /**
+     * Init the spawn options on in the scene were the characters will spawn
+     */
     private void InitializeSpawnPositions()
     {
         spawnPoints = new Vector3[9];
@@ -135,6 +129,9 @@ public class Spawner : MonoBehaviour
         spawnPoints[8] = new Vector3(10f, -15.6f, z);
     }
 
+    /**
+     * Spawn the characters at the certain spawnpoints
+     */
     private void SpawnCharacter()
     {
         int spawnPoint;

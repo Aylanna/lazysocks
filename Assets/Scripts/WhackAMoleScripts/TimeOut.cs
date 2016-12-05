@@ -12,7 +12,6 @@ public class TimeOut : MonoBehaviour {
     {
         wrongCharacter = true;
         timer = 0.000f;
-        CheckForDifficulty();
         timeOut = Spawner.removeTimer;
     }
 
@@ -37,13 +36,5 @@ public class TimeOut : MonoBehaviour {
         yield return new WaitForSeconds(Spawner.timer);
         Spawner.spawnNum = 0;
         Destroy(this.gameObject);
-    }
-
-    private void CheckForDifficulty()
-    {
-//        if (Score.score % 10 == 0)
-//        {
-//            Spawner.removeTimer -= 0.1f;
-//        }
     }
 }

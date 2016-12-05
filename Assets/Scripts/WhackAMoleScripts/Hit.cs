@@ -20,9 +20,12 @@ public class Hit : MonoBehaviour {
         }
     }
 
+    /**
+     * This class makes sure the characters get destroyed when there is a touch on the screen or a mouse click
+     */
     private void HitTarget()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit Hit;
@@ -39,8 +42,7 @@ public class Hit : MonoBehaviour {
                     if (gameObject.tag == "Bad")
                     {
                         TimeOut.wrongCharacter = false;
-                        Spawner.spawnNum = 0;
-                        Destroy(this.gameObject);
+                        Spawner.spawnNum = 1;
                     }
                     else
                     {
