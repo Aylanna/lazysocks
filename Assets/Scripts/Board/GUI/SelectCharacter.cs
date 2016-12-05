@@ -26,7 +26,7 @@ public class SelectCharacter : MonoBehaviour {
     {
         if (counter > controller.numbersOfPlayers && isDice)
         {
-            selectCharacter.GetComponent<Canvas>().enabled = false;
+			selectCharacter.GetComponent<Canvas>().enabled = false;
             controller.state = 1;
             
         }

@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     public int diceValue;
     public GameObject activePlayer; 
     public int state = 0;
-    // public GameObject aktivePlayer;
+    
     public GameObject[] players;
     public int numbersOfPlayers = 0;
     private GameObject[] orderOfPlayer;
@@ -46,16 +46,16 @@ public class GameController : MonoBehaviour {
                     Invoke("SetDiceCanvasInactive", 1);
                     SortOrderOfPlayers();
                     TestPlayerOrder();
-                    playerIDDice = 0;
+                  //  playerIDDice = 0;
                     state = 2;
                 }
                 break;
             case 2:
-                activePlayer = orderOfPlayer[playerIDDice];
-                rollADice.GetComponent<Canvas>().enabled = true;
-                dice.messageText.text = activePlayer.GetComponent<PlayerController>().playerName;
-                Invoke("SetDiceCanvasInactive", 1);
-                state = 3;
+              //  activePlayer = orderOfPlayer[playerIDDice];
+              //  rollADice.GetComponent<Canvas>().enabled = true;
+             //   dice.messageText.text = activePlayer.GetComponent<PlayerController>().playerName;
+             //   Invoke("SetDiceCanvasInactive", 1);
+             //   state = 3;
                 break;
             case 3:
                 
