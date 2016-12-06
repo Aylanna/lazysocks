@@ -111,22 +111,22 @@ public class Spawner : MonoBehaviour
         spawnPoints = new Vector3[9];
         taken = new bool[9];
 
-        float z = -1.3f;
+        float z = 0f;
 
         // Top row
-        spawnPoints[0] = new Vector3(-10f, 15f, z);
-        spawnPoints[1] = new Vector3(0f, 15f, z);
-        spawnPoints[2] = new Vector3(10f, 15f, z);
+        spawnPoints[0] = new Vector3(-7.3f, 11.3f, z);
+        spawnPoints[1] = new Vector3(0f, 11.3f, z);
+        spawnPoints[2] = new Vector3(7.4f, 11.3f, z);
 
         //Middle row
-        spawnPoints[3] = new Vector3(-10f, -0.5f, z);
-        spawnPoints[4] = new Vector3(0f, -0.5f, z);
-        spawnPoints[5] = new Vector3(10f, -0.5f, z);
+        spawnPoints[3] = new Vector3(-7.3f, 0f, z);
+        spawnPoints[4] = new Vector3(0f, 0f, z);
+        spawnPoints[5] = new Vector3(7.4f, 0f, z);
 
         //Bottom row
-        spawnPoints[6] = new Vector3(-10f, -15.6f, z);
-        spawnPoints[7] = new Vector3(0f, -15.6f, z);
-        spawnPoints[8] = new Vector3(10f, -15.6f, z);
+        spawnPoints[6] = new Vector3(-7.3f, -11.3f, z);
+        spawnPoints[7] = new Vector3(0f, -11.3f, z);
+        spawnPoints[8] = new Vector3(7.4f, -11.3f, z);
     }
 
     /**
