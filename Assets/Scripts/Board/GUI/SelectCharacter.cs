@@ -11,6 +11,7 @@ public class SelectCharacter : MonoBehaviour {
     private int counter = 1;
     private PlayerController player;
     private GameController controller;
+	private Toggle activeToggle;
 
     private Toggle[] characters;
 
@@ -24,14 +25,7 @@ public class SelectCharacter : MonoBehaviour {
 
     void Update()
     {
-        //if (counter > controller.numbersOfPlayers && isDice)
-       // {
-		//	selectCharacter.GetComponent<Canvas>().enabled = false;
-        //    controller.state = 1;
-            
-       // }
-       // if (controller.numbersOfPlayers > 0)
-        //    isDice = true;
+      
     
        
         
@@ -53,6 +47,10 @@ public class SelectCharacter : MonoBehaviour {
             {
                // Debug.Log("Selected Character " + i + " from Player " + counter);
                 controller.players[i].SetActive(true);
+
+				characters [i].enabled = false;
+
+
                
             }
         }

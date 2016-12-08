@@ -5,9 +5,7 @@ public class PlayerController : MonoBehaviour {
 
     private int diceValue;
     public string playerName;
-  
 
-    
     public void SetDiceValue(int diceValue)
     {
         this.diceValue = diceValue;
@@ -17,5 +15,9 @@ public class PlayerController : MonoBehaviour {
     {
         return diceValue;
     }
+
+
+
+	
 
 }

@@ -11,16 +11,21 @@ public class GameController : MonoBehaviour {
     public int diceValue;
     public GameObject activePlayer; 
     public int state = 0;
-    
+	private BoardController bc;
     public GameObject[] players;
     public int numbersOfPlayers = 0;
     private GameObject[] orderOfPlayer;
     public bool isDice = false;
     private Dice dice;
 
+	public GameObject startField;
+
 
     void Start()
     {
+		//orderOfPlayer = new GameObject[numbersOfPlayers];
+		//dice = GetComponent<Dice> ();
+		//bc = GetComponent<BoardController> ();
        
     }
  
@@ -29,10 +34,12 @@ public class GameController : MonoBehaviour {
         switch(state)
         {
             // Game preparation
-            case 0:
-                orderOfPlayer = new GameObject[numbersOfPlayers];
-                dice = GetComponent<Dice>();
+		case 0:
+			orderOfPlayer = new GameObject[numbersOfPlayers];
+			dice = GetComponent<Dice> ();
+			bc = GetComponent<BoardController> ();
                 break;
+			//Player role for highscore
             case 1:
                 if(playerIDDice < numbersOfPlayers) {
                     rollADice.GetComponent<Canvas>().enabled = true;
@@ -41,51 +48,44 @@ public class GameController : MonoBehaviour {
 					if (isDice) {
 						orderOfPlayer [playerIDDice] = activePlayer;
 						playerIDDice++;
+					    rollADice.GetComponent<Canvas> ().enabled = false;
 						isDice = false;
 					}
                 }
                 else
                 {
-				
-                  //  Invoke("SetDiceCanvasInactive", 1);
-				rollADice.GetComponent<Canvas> ().enabled = false;
+					rollADice.GetComponent<Canvas> ().enabled = false;
                     SortOrderOfPlayers();
                    // TestPlayerOrder();
 					playerIDDice = 0;
 					isDice = false;
                     state = 2;
                 }
-                break;
+			break;
+		//Player dice
 		case 2:
-			
 			activePlayer = orderOfPlayer [playerIDDice];
-			Debug.Log ("order " + orderOfPlayer.Length + " " + "ID " + playerIDDice);
 			rollADice.GetComponent<Canvas> ().enabled = true;
 			dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
-
 			if (isDice) {
 				Invoke ("SetDiceCanvasInactive", 1);
 				isDice = false;
 				state = 3;
 			}
-                break;
+			break;
+		//Player moves
 		case 3:
-			Debug.Log ("Player moves " + activePlayer.GetComponent<PlayerController> ().playerName);
-			Debug.Log ("Player Field interaction " + activePlayer.GetComponent<PlayerController> ().playerName);
-			if (playerIDDice < orderOfPlayer.Length) {
-				//Debug.Log ("ID " + playerIDDice);
+			bc.HandleBoardEvent ();
+			state = 4;  
+			break;
+		//next player or new round
+		case 4:
+			if (playerIDDice < orderOfPlayer.Length - 1) {
 				playerIDDice++;
-				state = 2;
 			} else {
-				state = 4;
+				playerIDDice = 0;
 			}
-                //Player move
-                // player interact
-                //for now:
-               
-                break;
-            case 4:
-                //move activePlayer
+			state = 2;
                 break;
         }
     }
