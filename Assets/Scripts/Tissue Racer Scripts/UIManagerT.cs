@@ -3,7 +3,7 @@ using System.Collections;
 using System.Globalization;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManagerT : MonoBehaviour
 {
 	public Button[] buttons;
     public GameObject mainMenuPanel;

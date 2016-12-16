@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Destroyer : MonoBehaviour
+public class DestroyerT : MonoBehaviour
 {
 	// Use this for initialization
 	void Start ()
