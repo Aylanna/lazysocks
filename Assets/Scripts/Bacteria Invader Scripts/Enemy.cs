@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private GameObject projectile;
 	[SerializeField] private float projectileSpeed = 10f;
 	[SerializeField] private float health = 150f;
-	[SerializeField] private float shotsPerSecond = 0.5f;
-	[SerializeField] private int scoreValue = 150;
+	[SerializeField] private float shotsPerSecond = 0.3f;
+	[SerializeField] private int scoreValue = 100;
 	
 	private ScoreManager scoreManager; 
 	

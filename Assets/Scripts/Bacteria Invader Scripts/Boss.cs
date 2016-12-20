@@ -6,8 +6,8 @@ public class Boss : MonoBehaviour
 	[SerializeField] private GameObject projectile;
 	[SerializeField] private float projectileSpeed = 10f;
 	[SerializeField] private float health = 150f;
-	[SerializeField] private float shotsPerSecond = 0.5f;
-	[SerializeField] private int scoreValue = 150;
+	[SerializeField] private float shotsPerSecond = 0.3f;
+	[SerializeField] private int scoreValue = 500;
 
 	private ScoreManager scoreManager; 
 	private UIManager uiManager; 
@@ -51,8 +51,7 @@ public class Boss : MonoBehaviour
 	{
 		scoreManager.Score (scoreValue);
 		Destroy(gameObject);
-
-		uiManager.bossDead.text = "You defeated the boss and got an item!s";
+		uiManager.bossDead.text = "You defeated the boss and got an item!";
 		uiManager.GameOver ();
 	}
 }

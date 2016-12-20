@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
 	[SerializeField] private GameObject laser;
 	[SerializeField] private float projectileSpeed = 10;
-	[SerializeField] private float projectileRepeatRate = 0.2f;
+	[SerializeField] private float projectileRepeatRate = 0.3f;
 
 	[SerializeField] private float speed = 15.0f;
 	[SerializeField] private float health = 200;
@@ -13,16 +13,42 @@ public class Player : MonoBehaviour
 	private float padding = 1;
 	private float xmax = -5;
 	private float xmin = 5;
+	private Vector3 position; 
+
+	private bool moveRight;
+	private bool moveLeft;
+	private bool shoot; 
+	private bool currentPlatformAndroid = false;
+
+	private Rigidbody2D rb;
 
 	private UIManager uiManager; 
 
 	private void Start()
 	{
+		rb = GetComponent<Rigidbody2D> ();
+
+		#if UNITY_ANDROID
+		currentPlatformAndroid = true; 
+		speed = 5f; 
+		#endif
+
+		position = transform.position; 
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> ();
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
 		xmin = camera.ViewportToWorldPoint(new Vector3(0,0,distance)).x + padding;
 		xmax = camera.ViewportToWorldPoint(new Vector3(1,1,distance)).x - padding;
+
+		if (currentPlatformAndroid)
+		{
+			Debug.Log ("Android");
+		} 
+		else
+		{
+			Debug.Log ("Windows");
+		}
+
 	}
 
 	private void Fire()
@@ -33,26 +59,28 @@ public class Player : MonoBehaviour
 
 	private void Update () 
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
+
+		if (currentPlatformAndroid)
 		{
-			InvokeRepeating("Fire", 0.0001f, projectileRepeatRate);
+			TouchMove (); 
 		}
-		if(Input.GetKeyUp(KeyCode.Space))
+		else 
 		{
-			CancelInvoke("Fire");
+			position.x += Input.GetAxis ("Horizontal") * speed * Time.deltaTime;
+			position.x = Mathf.Clamp (position.x, xmin, xmax);
+
+			transform.position = position;
+
+			if (Input.GetKeyDown (KeyCode.Space))
+				FireControl ();
+
+			if (Input.GetKeyUp (KeyCode.Space))
+				CancelFireControl ();
 		}
-		if(Input.GetKey(KeyCode.LeftArrow))
-		{
-			transform.position = new Vector3(
-				Mathf.Clamp(transform.position.x - speed * Time.deltaTime, xmin, xmax), transform.position.y, transform.position.z 
-			);
-		}
-		else if (Input.GetKey(KeyCode.RightArrow))
-		{
-			transform.position = new Vector3(
-				Mathf.Clamp(transform.position.x + speed * Time.deltaTime, xmin, xmax),transform.position.y, transform.position.z 
-			);
-		}
+
+		position = transform.position;
+		position.x = Mathf.Clamp (position.x, xmin, xmax);
+		transform.position = position;			
 	}
 		
 	private void OnTriggerEnter2D(Collider2D collider)
@@ -68,13 +96,60 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-	
+
+	void TouchMove()
+	{
+		if (Input.touchCount > 0) {
+
+			Touch touch = Input.GetTouch (0);
+
+			float middle = Screen.width / 2;
+
+			if (touch.phase == TouchPhase.Began) {
+				FireControl ();
+			}
+			if (touch.position.x < middle && touch.phase == TouchPhase.Began) {
+				MoveLeft ();
+			} 
+			else if (touch.position.x > middle && touch.phase == TouchPhase.Began) {
+				MoveRight ();
+			}
+		}
+		else
+		{
+			SetVelocityZero();
+			CancelFireControl ();
+		}
+	}
+		
+	private void MoveLeft() 
+	{
+		rb.velocity = new Vector2 (-speed, 0);
+	}
+
+	private void MoveRight()
+	{
+		rb.velocity = new Vector2 (speed, 0);
+	}
+
+	private void FireControl ()
+	{
+		InvokeRepeating("Fire", 0.0001f, projectileRepeatRate);
+	}
+
+	private void CancelFireControl () {
+		CancelInvoke("Fire");
+	}
+
+	public void SetVelocityZero()
+	{
+		rb.velocity = Vector2.zero;
+	}
+
 	private void Die()
 	{
 		Destroy(gameObject);
 		uiManager.bossDead.text = "You didn't defeat the boss";
 		uiManager.GameOver ();
-
-	
 	}
 }

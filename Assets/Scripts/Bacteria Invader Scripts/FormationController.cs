@@ -16,6 +16,10 @@ public class FormationController : MonoBehaviour
 	// Use this for initialization
 	private void Start () 
 	{
+		#if UNITY_ANDROID
+			speed = 3f; 
+		#endif
+
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
 		boundaryLeftEdge = camera.ViewportToWorldPoint(new Vector3(0,0,distance)).x + padding;
