@@ -8,8 +8,8 @@ public class ScoreDisplay : MonoBehaviour
 	// Use this for initialization
 	private void Start ()
 	{
-		Text myText = GetComponent<Text>();
-		myText.text = ScoreManager.score.ToString ();
+		Text scoreText = GetComponent<Text>();
+		scoreText.text = ScoreManager.score.ToString ();
 		ScoreManager.Reset();
 	}
 }

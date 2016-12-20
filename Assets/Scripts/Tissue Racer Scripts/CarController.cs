@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CarController : MonoBehaviour
 {
-    public UIManager ui;
+    public UIManagerT ui;
 
     public float carSpeed;
 	public float maxPos = 2.25f;
