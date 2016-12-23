@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SelectCharacter : MonoBehaviour {
 
     public Canvas selectCharacter;
+	public Color disableColor = Color.gray;
     public Text messageText;
     public Canvas rollADice;
     private bool isDice = false;
@@ -45,16 +46,23 @@ public class SelectCharacter : MonoBehaviour {
         {
             if (characters[i].isOn)
             {
-               // Debug.Log("Selected Character " + i + " from Player " + counter);
                 controller.players[i].SetActive(true);
-
-				characters [i].enabled = false;
-
-
-               
+				characters [i].enabled = false;  
+				characters [i].gameObject.SetActive (false);
             }
         }
     }
+
+	void SetActivePlayers() {
+		int index = 0;
+		for (int i = 0; i < controller.players.Count; i++) {
+			if (controller.players [i].activeSelf && (index < controller.numbersOfPlayers)) {
+				controller.orderOfPlayer [index] = controller.players [i];
+				index++;
+			}
+		}
+
+	}
 
     public void Submit()
     {
@@ -64,10 +72,9 @@ public class SelectCharacter : MonoBehaviour {
         SetToggleNotActive();  
 		if (counter > controller.numbersOfPlayers)
 		{
+			SetActivePlayers ();
 			selectCharacter.GetComponent<Canvas>().enabled = false;
 			controller.state = 1;
-
-		}
-           
+		}          
     }
 }

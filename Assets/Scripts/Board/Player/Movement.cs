@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour {
 	public float rotationSpeed = 5.0f;
 	public string pathName;
 	private bool move;
+	private GameObject currentField;
 
 	void Start() {
 	//	pathToFollow = GameObject.Find (pathName).GetComponent<EditorPath>();
@@ -22,13 +23,21 @@ public class Movement : MonoBehaviour {
 		if (transform.position != pathToFollow.pathObjs [currentWayPointID].position) {
 			transform.position = Vector3.Lerp (transform.position, pathToFollow.pathObjs [currentWayPointID].position, Time.deltaTime * speed);
 		} else {
-			//currentWayPointID++;
+			currentField = pathToFollow.pathObjs [currentWayPointID].gameObject;
 			move = false;
 		}
 	}
 
+	public GameObject GetCurrentField() {
+		return currentField;
+	}
+
 	public void SetMove(bool move) {
 		this.move = move;
+	}
+
+	public bool GetMove() {
+		return move;
 	}
 
 }
