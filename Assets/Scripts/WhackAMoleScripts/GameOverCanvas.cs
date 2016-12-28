@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverCanvas : MonoBehaviour {
 
     private Canvas gameOverCanvas;
+	public GameObject additiveScene;
+	private Sceneloader scl;
+
 
     [SerializeField] private Text finalScore;
     [SerializeField] private Text neededScore;
@@ -15,6 +19,8 @@ public class GameOverCanvas : MonoBehaviour {
     {
         gameOverCanvas = GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
+
+	
     }
 
     // Update is called once per frame
@@ -54,4 +60,12 @@ public class GameOverCanvas : MonoBehaviour {
         yield return new WaitForSeconds(1.0f);
         gameOverCanvas.enabled = true;
     }
+
+	public void BackToBoard() {
+		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.UnLoadMinigame ();
+	    Destroy (additiveScene);
+
+
+	}
 }

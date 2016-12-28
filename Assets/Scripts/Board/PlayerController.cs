@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour {
 	public int startLifePoints = 1;
 	//public Text lifePointsText;
 	private int lifePoints = 1;
+	public Transform position;
 
 	void Start () {
 
 		lifePoints = PlayerPrefs.GetInt ("StartLifePoints");
+
+
 	}
 
     public void SetDiceValue(int diceValue)

@@ -3,11 +3,14 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 public class GameController : MonoBehaviour {
 
-   public Canvas rollADice;
-   public Canvas gameMenu;
-   // public int playerIDMovement;
+    public Canvas rollADice;
+    public Canvas gameMenu;
+	public bool isMinigamePlayed;
+	public GameObject mainScene;
     public int playerIDDice;
 	public int playerIDMovement;
     public int diceValue;
@@ -19,9 +22,7 @@ public class GameController : MonoBehaviour {
     public GameObject[] orderOfPlayer;
     public bool isDice = false;
     private Dice dice;
-	private bool pause;
 	private int round = 1;
-	private int tempRound;
 	public GameObject startField;
 
 
@@ -35,8 +36,6 @@ public class GameController : MonoBehaviour {
  
     void Update()
     {
-		if (pause)
-			return;
         switch(state)
         {
             // Game preparation
@@ -61,7 +60,6 @@ public class GameController : MonoBehaviour {
 				isDice = false;
 				dice.SetDiceActive ();
 				dice.SetMessage ("Round: " + round.ToString());
-				//rollADice.GetComponent<Canvas> ().enabled = false;
 				 playerIDDice = 0;
 				dice.InActivateNextPlayer ();
 				state = 2;
@@ -69,21 +67,15 @@ public class GameController : MonoBehaviour {
 			break;
 		//Player dice
 		case 2:
-			//gameMenu.GetComponent<Canvas> ().enabled = true;
-			 //rollADice.GetComponent<Canvas>().enabled = true;
 			Invoke ("SetDiceCanvasActive", 1);
 			activePlayer = orderOfPlayer [playerIDDice];
 			if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
 				state = 10;
 
 			} else {
-				
-				//Invoke ("SetDiceCanvasActive", 1);
-
 				dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
 				if (isDice) {
 					Invoke ("SetDiceCanvasInactive", 1);
-
 					isDice = false;
 					gameMenu.GetComponent<GameMenu> ().UpdateView ();
 					gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
@@ -103,7 +95,6 @@ public class GameController : MonoBehaviour {
 		//FieldAct
 		case 4:
 			bc.HandleFieldAct ();
-				//state = 8;
 			break;
 		//ExtraDice
 		case 5:
@@ -119,7 +110,12 @@ public class GameController : MonoBehaviour {
 		//Minigame
 		case 7:
 			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame!!!");
-			state = 10;
+			if (isMinigamePlayed) {
+				state = 10;
+				isMinigamePlayed = false;
+			}
+
+			//Else Wait for the end of the minigame
 			break;
 		//FieldAction Movement
 		case 8:
