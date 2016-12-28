@@ -8,6 +8,7 @@ public class GameOverCanvas : MonoBehaviour {
     private Canvas gameOverCanvas;
 	public GameObject additiveScene;
 	private Sceneloader scl;
+	private bool extraLife;
 
 
     [SerializeField] private Text finalScore;
@@ -19,6 +20,7 @@ public class GameOverCanvas : MonoBehaviour {
     {
         gameOverCanvas = GetComponent<Canvas>();
         gameOverCanvas.enabled = false;
+
 
 	
     }
@@ -32,23 +34,27 @@ public class GameOverCanvas : MonoBehaviour {
         if (!Spawner.isTapped)
         {
             StartCoroutine(PauseBeforeGameOver());
+
         }
 
         if (Spawner.playName == "Bad")
         {
             StartCoroutine(PauseBeforeGameOver());
+
         }
 
         if (Score.score == Score.neededScoreForLive)
         {
             StartCoroutine(PauseBeforeGameOver());
             lives.text = "You got an extra live";
+			extraLife = true;
             TimeOut.wrongCharacter = false;
             Spawner.spawnNum = 1;
         }
         else
         {
             lives.text = "You didn't get an extra live";
+			extraLife = false;
         }
 
     }
@@ -63,8 +69,10 @@ public class GameOverCanvas : MonoBehaviour {
 
 	public void BackToBoard() {
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.SetExtraLife (extraLife);
 		scl.UnLoadMinigame ();
 	    Destroy (additiveScene);
+
 
 
 	}

@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour
     public static bool isTapped = true;
     public static bool check;
 
+	public GameObject parentObject;
+
 
     // Use this for initialization
 	private void Start () {
@@ -147,47 +149,56 @@ public class Spawner : MonoBehaviour
             {
                 if (spawnType == 0)
                 {
-                    Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject goodObj = (GameObject) Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					goodObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 1)
                 {
-                    Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject badObj = (GameObject)Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					badObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 2)
                 {
-                    Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject goodObj = (GameObject) Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					goodObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 3)
                 {
-                    Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject badObj = (GameObject)Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					badObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 4)
                 {
-                    Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject goodObj = (GameObject) Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					goodObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 5)
                 {
-                    Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject badObj = (GameObject)Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					badObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 6)
                 {
-                    Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject goodObj = (GameObject) Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					goodObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 7)
                 {
-                    Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject badObj = (GameObject) Instantiate(bad, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					badObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
                 if (spawnType == 8)
                 {
-                    Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					GameObject goodObj = (GameObject) Instantiate(good, spawnPoints[spawnPoint], Quaternion.Euler(90, 180, 0));
+					goodObj.transform.parent = parentObject.transform;
                     taken[spawnPoint] = true;
                 }
 

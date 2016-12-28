@@ -111,8 +111,9 @@ public class GameController : MonoBehaviour {
 		case 7:
 			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame!!!");
 			if (isMinigamePlayed) {
-				state = 10;
 				isMinigamePlayed = false;
+				state = 10;
+
 			}
 
 			//Else Wait for the end of the minigame

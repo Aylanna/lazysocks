@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Sceneloader : MonoBehaviour {
 	
 	private GameController gc;
-	private bool loadMinigame;
+	private bool extraLife;
 	private int sceneIndex;
 
 
@@ -18,6 +18,8 @@ public class Sceneloader : MonoBehaviour {
 	    SceneManager.UnloadScene(sceneIndex);
 		gc.mainScene.SetActive (true);
 		gc.isMinigamePlayed = true;
+		if(extraLife)
+			gc.activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
 	
 	}
 
@@ -26,8 +28,8 @@ public class Sceneloader : MonoBehaviour {
 		SceneManager.LoadScene (sceneIndex, LoadSceneMode.Additive);
 	}
 
-	public void SetLoadMinigame(bool loadMinigame) {
-		this.loadMinigame = loadMinigame;
+	public void SetExtraLife(bool extraLife) {
+		this.extraLife = extraLife;
 	}
 
 	public void SetSceneIndex(int sceneIndex) {
