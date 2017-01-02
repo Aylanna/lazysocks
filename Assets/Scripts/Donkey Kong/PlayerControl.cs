@@ -156,6 +156,9 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	public void Jump() {
+
+        Debug.Log(isGrounded);
+
 		if (isGrounded) {
 			jumping = true; 
 			isGrounded = false;
