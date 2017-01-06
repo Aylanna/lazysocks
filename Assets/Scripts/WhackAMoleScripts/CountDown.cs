@@ -7,8 +7,8 @@ public class CountDown : MonoBehaviour
 {
     private float timer;
 
-    [SerializeField] private Canvas countDownCanvas;
-    [SerializeField] private Text countDown;
+    public Canvas countDownCanvas;
+    public Text countDown;
 
     void Start()
     {

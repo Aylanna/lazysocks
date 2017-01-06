@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 
     public Canvas rollADice;
     public Canvas gameMenu;
+	public Canvas playerOrder;
 	public bool isMinigamePlayed;
 	public GameObject mainScene;
     public int playerIDDice;
@@ -56,18 +57,21 @@ public class GameController : MonoBehaviour {
                 else
                 {
                  SortOrderOfPlayers();
+				StartCoroutine (HighScoreState());
                    // TestPlayerOrder();
 				isDice = false;
 				dice.SetDiceActive ();
 				dice.SetMessage ("Round: " + round.ToString());
 				 playerIDDice = 0;
 				dice.InActivateNextPlayer ();
-				state = 2;
+				StartCoroutine (RollADiceState());
+				//state = 2;
 			}
 			break;
 		//Player dice
 		case 2:
-			Invoke ("SetDiceCanvasActive", 1);
+			//Invoke ("SetDiceCanvasActive", 1);
+			rollADice.enabled = true;
 			activePlayer = orderOfPlayer [playerIDDice];
 			if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
 				state = 10;
@@ -75,7 +79,10 @@ public class GameController : MonoBehaviour {
 			} else {
 				dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
 				if (isDice) {
-					Invoke ("SetDiceCanvasInactive", 1);
+					//Invoke ("SetDiceCanvasInactive", 1);
+					//StartCoroutine (MoveState());
+					rollADice.enabled = false;
+					gameMenu.enabled = true;
 					isDice = false;
 					gameMenu.GetComponent<GameMenu> ().UpdateView ();
 					gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
@@ -147,6 +154,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
+	/**
 	private void SetGameMenuInActive(){
 		gameMenu.GetComponent<Canvas> ().enabled = false;
 	}
@@ -160,12 +168,7 @@ public class GameController : MonoBehaviour {
 	{
 		rollADice.GetComponent<Canvas>().enabled = true;
 	}
-    public void SortOrderOfPlayers()
-    {
-        Array.Sort(orderOfPlayer,
-     delegate (GameObject player1, GameObject player2) { return - player1.GetComponent<PlayerController>().GetDiceValue().
-         CompareTo(player2.GetComponent<PlayerController>().GetDiceValue()); });
-    }
+   
 
     public void TestPlayerOrder()
     {
@@ -175,16 +178,14 @@ public class GameController : MonoBehaviour {
             Debug.Log(p.GetComponent<PlayerController>().playerName + "   " + p.GetComponent<PlayerController>().GetDiceValue().ToString());
         }
     }
-
-    public void SetPlayerIDDice(int playerIDDice)
-    {
-        this.playerIDDice = playerIDDice;
-    }
-
-    public int GetPlayerIDDice()
-    {
-        return playerIDDice;
-    }
+	*/
+	public void SortOrderOfPlayers()
+	{
+		Array.Sort(orderOfPlayer,
+			delegate (GameObject player1, GameObject player2) { return - player1.GetComponent<PlayerController>().GetDiceValue().
+				CompareTo(player2.GetComponent<PlayerController>().GetDiceValue()); });
+	}
+ 
 
 	void DiceForHighscore() {
 		rollADice.GetComponent<Canvas>().enabled = true;
@@ -201,5 +202,32 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	protected IEnumerator HighScoreState()
+	{
+		yield return new WaitForSeconds(1.0f);
+		rollADice.enabled = false;
+		playerOrder.enabled = true;
+		playerOrder.GetComponent<OrderOfPlayers> ().ShowOrderOfPlayer ();
+
+	}
+
+	protected IEnumerator RollADiceState()
+	{
+		yield return new WaitForSeconds(3.0f);
+		playerOrder.enabled = false;
+		rollADice.GetComponent<Canvas>().enabled = true;
+		state = 2;
+
+
+	}
+
+	protected IEnumerator MoveState()
+	{
+		yield return new WaitForSeconds(1.0f);
+		rollADice.GetComponent<Canvas>().enabled = false;
+		gameMenu.GetComponent<Canvas>().enabled = true;
+
+
+	}
 
 }

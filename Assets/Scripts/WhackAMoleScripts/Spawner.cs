@@ -11,8 +11,8 @@ using Debug = UnityEngine.Debug;
 /// </summary>
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject good;
-    [SerializeField] private GameObject bad;
+     public GameObject good;
+     public GameObject bad;
 
     public Vector3[] spawnPoints;
     public bool[] taken;

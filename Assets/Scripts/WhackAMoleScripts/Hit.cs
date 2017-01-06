@@ -25,15 +25,21 @@ public class Hit : MonoBehaviour {
      */
     private void HitTarget()
     {
+		
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
+			
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             RaycastHit Hit;
+		
 
             if (Physics.Raycast(ray, out Hit))
             {
+				
                 if (Hit.collider.gameObject == gameObject)
                 {
+					
                     Spawner.playName = gameObject.tag;
                     Spawner.isTapped = true;
                     Spawner.check = true;
@@ -53,4 +59,6 @@ public class Hit : MonoBehaviour {
             }
         }
     }
+
+
 }

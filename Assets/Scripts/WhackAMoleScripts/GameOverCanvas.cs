@@ -11,9 +11,9 @@ public class GameOverCanvas : MonoBehaviour {
 	private bool extraLife;
 
 
-    [SerializeField] private Text finalScore;
-    [SerializeField] private Text neededScore;
-    [SerializeField] private Text lives;
+	public Text finalScore;
+    public Text neededScore;
+    public Text lives;
 
     // Use this for initialization
     void Start ()
@@ -68,10 +68,26 @@ public class GameOverCanvas : MonoBehaviour {
     }
 
 	public void BackToBoard() {
+		
+		Spawner.check = false;
+		Spawner.isTapped = true;
+		Spawner.playName = "";
+		Spawner.removeTimer = 0;
+		Spawner.spawnNum = 0;
+		Spawner.timeLeft = 0;
+		Spawner.timer = 0;
+
+	    Score.neededScoreForLive = 3;
+		Score.score = 0;
+
+		TimeOut.wrongCharacter = false;
+
+
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife (extraLife);
 		scl.UnLoadMinigame ();
 	    Destroy (additiveScene);
+
 
 
 
