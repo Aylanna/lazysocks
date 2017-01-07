@@ -94,11 +94,4 @@ public class UIManagerT : MonoBehaviour
 	{
 		Application.LoadLevel(Application.loadedLevel);
 	}
-
-	public void Exit()
-	{
-		Application.Quit ();
-	}
-	
-
 }

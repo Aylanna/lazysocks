@@ -9,6 +9,7 @@ public class MemoryController : MonoBehaviour {
 	public const float offsetX = 1f;
 	public const float offsetY = 1.5f;
 
+	public UIManagerM ui; 
 	public MemoryCard originalCard;
 	public Sprite[] images;
 	public Slider bossHealthSlider;
@@ -112,10 +113,8 @@ public class MemoryController : MonoBehaviour {
 
 
 	public void WinGame () {
-		Debug.Log ("You won the game!");
-		Time.timeScale = 0; 
-
-		//menu switch /get boss item
+		Debug.Log ("You won the game!"); 
+		ui.GameOverBossDefeat (); 
 	}
 
 }

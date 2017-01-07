@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 
+	public UIManagerM ui; 
 	public float timeLeft = 120; 
 	public Text timerText; 
 
@@ -26,6 +27,6 @@ public class Timer : MonoBehaviour {
 
 	void GameOver() {
 		Debug.Log ("Game Over");
-		Time.timeScale = 0; 
+		ui.GameOverNoBossDefeat (); 
 	}
 }

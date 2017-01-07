@@ -8,6 +8,8 @@ public class BallBehavior : MonoBehaviour {
 	public float ballForce;
 	bool gameStarted = false;
 
+	public UiManagerBrickBreaker ui; 
+
 	// Update is called once per frame
 	void Update () {
 		StartGameKey (); 
@@ -18,7 +20,9 @@ public class BallBehavior : MonoBehaviour {
 		if (col.gameObject.tag == "Finish")
 		{
 			Debug.Log ("Game Over");
-			Destroy (gameObject); 
+			Destroy (gameObject);
+
+			ui.GameOver (); 
 		}
 	}
 

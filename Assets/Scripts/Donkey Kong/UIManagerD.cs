@@ -1,24 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using System.Globalization;
 using UnityEngine.UI;
 
-public class UiManagerBrickBreaker : MonoBehaviour {
-
+public class UIManagerD : MonoBehaviour
+{
 	public Button[] buttons;
 	public GameObject mainMenuPanel;
 	public GameObject gameOverPanel;
 
-	public Text scoreText;
-	public Text gameOverScoreText;
-	public Text extraLifeText;
+	public Text gameOverText;
 
 	private bool gameOver;
-	private int score;
-	private int neededScore = 24;
+
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		//set mainmenu panel as active from the start and set the time scale on 0
 		mainMenuPanel = GameObject.Find("MainMenuPanel");
 		Time.timeScale = 0;
@@ -29,35 +27,21 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 		gameOverPanel.SetActive(false);
 
 		gameOver = false;
-		score = 0;
 	}
 
-	// Update is called once per frame
-	void Update () {
-	}
-
-	public void IncrementScore(){
-		score++;
-		scoreText.text = "Score: " + score;
-
-		if (score == neededScore) {
-			GameOver (); 
-		}
-	}
-
-	public void GameOver()
+	public void GameOverBossDefeat()
 	{
 		gameOver = true;
-		gameOverScoreText.text = "Your score: " + score;
+		gameOverText.text = "You got the magic toilet brush!";
 
-		if (score >= neededScore)
-		{
-			extraLifeText.text = "You got an extra life";
-		}
-		else
-		{
-			extraLifeText.text = "You didn't get an extra life";
-		}
+		gameOverPanel.SetActive(true);
+		Pause();
+	}
+
+	public void GameOverNoBossDefeat()
+	{
+		gameOver = true;
+		gameOverText.text = "You didnt defeat the boss and have no lives anymore :(";
 
 		gameOverPanel.SetActive(true);
 		Pause();
@@ -85,5 +69,4 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	{
 		Application.LoadLevel(Application.loadedLevel);
 	}
-
 }

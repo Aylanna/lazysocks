@@ -7,8 +7,10 @@ public class PlayerControl : MonoBehaviour {
 	private GameObject goalItem; 
 	private Rigidbody2D rb;
 
-	[SerializeField] private float maxSpeed;
-	[SerializeField] private float jumpForce;
+
+	public UIManagerD ui;
+	public float maxSpeed;
+	public float jumpForce;
 
 	private float speed; 
 	private bool facingRight, jumping, isDead, hasWon, isGrounded; 
@@ -120,15 +122,7 @@ public class PlayerControl : MonoBehaviour {
 			isDead = true;
 			Destroy (gameObject);
 
-			// Set Mario's velocity to 0, and increase his mass so that the barrels can't push him around :)
-			rb.velocity = Vector2.zero;
-			rb.mass = 1000;
-
-			// Don't spawn any more barrels
-			if (barrelSpawner != null) barrelSpawner.Stop();
-
-			// Show the Game Over sprite
-			if (gameOverSprite != null) gameOverSprite.enabled = true;
+			ui.GameOverNoBossDefeat (); 
 		}
 	}
 
@@ -138,12 +132,7 @@ public class PlayerControl : MonoBehaviour {
 			
 			hasWon = true;
 			Destroy (goalItem);
-
-			// Don't spawn any more barrels
-			if (barrelSpawner != null) barrelSpawner.Stop();
-
-			// Show the Win sprite
-			if (winSprite != null) winSprite.enabled = true;
+			ui.GameOverBossDefeat ();
 		}
 	}
 
