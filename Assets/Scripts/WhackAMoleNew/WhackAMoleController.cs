@@ -33,6 +33,7 @@ public class WhackAMoleController : MonoBehaviour {
 			gameOverCanvas.enabled = true;
 			CancelInvoke ("CountDown");
 			spawner.StopSpawn ();
+			extraLife = true;
 			ic.gameOver = false;
 		}
 

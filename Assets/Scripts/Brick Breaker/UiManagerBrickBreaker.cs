@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiManagerBrickBreaker : MonoBehaviour {
 
 	public Button[] buttons;
 	public GameObject mainMenuPanel;
 	public GameObject gameOverPanel;
+	public GameObject additiveScene;
 
 	public Text scoreText;
 	public Text gameOverScoreText;
@@ -16,6 +18,8 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	private bool gameOver;
 	private int score;
 	private int neededScore = 24;
+	private Sceneloader scl;
+	private bool extraLife;
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +57,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 		if (score >= neededScore)
 		{
 			extraLifeText.text = "You got an extra life";
+			extraLife = true;
 		}
 		else
 		{
@@ -83,7 +88,10 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 
 	public void BackToBoard()
 	{
-		Application.LoadLevel(Application.loadedLevel);
+	    scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.SetExtraLife (extraLife);
+		scl.UnLoadMinigame ();
+		Destroy (additiveScene);
 	}
 
 }

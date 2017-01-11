@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManagerD : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class UIManagerD : MonoBehaviour
 	public Text gameOverText;
 
 	private bool gameOver;
+
+	public GameObject additiveScene;
+	private Sceneloader scl;
+	private bool extraLife;
 
 
 	// Use this for initialization
@@ -67,6 +72,9 @@ public class UIManagerD : MonoBehaviour
 
 	public void BackToBoard()
 	{
-		Application.LoadLevel(Application.loadedLevel);
+		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.SetExtraLife (extraLife);
+		scl.UnLoadMinigame ();
+		Destroy (additiveScene);
 	}
 }
