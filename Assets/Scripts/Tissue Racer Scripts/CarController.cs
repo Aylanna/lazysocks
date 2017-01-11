@@ -61,9 +61,10 @@ public class CarController : MonoBehaviour
 	{
 		if (col.gameObject.tag == "EnemyCar") {
 			//increase score
+			GameObject enemyCar = GameObject.FindGameObjectWithTag ("EnemyCar"); 
+			enemyCar.SetActive (false);
 
-			gameObject.SetActive(false);
-		    ui.GameOver();
+			ui.ScoreUpdate ();
 		}
 	}
 

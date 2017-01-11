@@ -16,7 +16,7 @@ public class UIManagerT : MonoBehaviour
 
 	private bool gameOver;
 	private int score;
-    private int neededScore = 10;
+    private int neededScore = 30;
 
 	// Use this for initialization
 	void Start ()
@@ -32,7 +32,7 @@ public class UIManagerT : MonoBehaviour
 
 		gameOver = false;
 		score = 0;
-		InvokeRepeating ("ScoreUpdate", 1.0f, 0.5f);
+		//InvokeRepeating ("ScoreUpdate", 1.0f, 0.5f);
 	}
 	
 	// Update is called once per frame
@@ -41,7 +41,7 @@ public class UIManagerT : MonoBehaviour
 		scoreText.text = "Score: " + score + "\n" + "Goal: " + neededScore;
 	}
 
-	void ScoreUpdate()
+	public void ScoreUpdate()
 	{
 		if (gameOver == false)
 		{
