@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI; 
 
 public class Player : MonoBehaviour 
 {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
 	private bool currentPlatformAndroid = false;
 
 	private Rigidbody2D rb;
-
+	private Slider playerHealth; 
 	private UIManager uiManager; 
 
 	private void Start()
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
 
 		position = transform.position; 
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> ();
+		playerHealth = GameObject.Find ("PlayerSlider").GetComponent<Slider> (); 
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
 		xmin = camera.ViewportToWorldPoint(new Vector3(0,0,distance)).x + padding;
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
 		if(missile)
 		{
 			health -= missile.GetDamage();
+			playerHealth.value = health; 
 			missile.Hit();
 			if (health <= 0) {
 				Die();
