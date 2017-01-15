@@ -6,6 +6,7 @@ public class BrickBehavior : MonoBehaviour {
 
 
 	public UiManagerBrickBreaker ui;
+
 	// Use this for initialization
 	void Start () {
 		ui = GameObject.FindWithTag ("ui").GetComponent<UiManagerBrickBreaker> ();
