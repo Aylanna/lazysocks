@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: b5506a3ffccd24ac9b8ca21f7df71804
-timeCreated: 1484143191
+guid: b4ab19a163006194590e09d8597780ec
+timeCreated: 1484507183
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TestSize128x_0
-    21300002: TestSize128x_1
-    21300004: TestSize128x_2
-    21300006: TestSize128x_3
-    21300008: TestSize128x_4
-    21300010: TestSize128x_5
+    21300000: SpaceInvader_Enemy_0
+    21300002: SpaceInvader_Enemy_1
+    21300004: SpaceInvader_Enemy_2
+    21300006: SpaceInvader_Enemy_3
+    21300008: SpaceInvader_Enemy_4
+    21300010: SpaceInvader_Enemy_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,6 +72,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   - buildTarget: Android
     maxTextureSize: 2048
     textureFormat: -1
@@ -92,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestSize128x_0
+      name: SpaceInvader_Enemy_0
       rect:
         serializedVersion: 2
         x: 4
@@ -105,7 +113,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TestSize128x_1
+      name: SpaceInvader_Enemy_1
       rect:
         serializedVersion: 2
         x: 132
@@ -118,7 +126,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TestSize128x_2
+      name: SpaceInvader_Enemy_2
       rect:
         serializedVersion: 2
         x: 260
@@ -131,7 +139,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TestSize128x_3
+      name: SpaceInvader_Enemy_3
       rect:
         serializedVersion: 2
         x: 388
@@ -144,7 +152,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TestSize128x_4
+      name: SpaceInvader_Enemy_4
       rect:
         serializedVersion: 2
         x: 516
@@ -157,7 +165,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TestSize128x_5
+      name: SpaceInvader_Enemy_5
       rect:
         serializedVersion: 2
         x: 644

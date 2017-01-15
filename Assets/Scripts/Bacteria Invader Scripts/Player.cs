@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Player : MonoBehaviour 
 {
-	[SerializeField] private GameObject laser;
-	[SerializeField] private float projectileSpeed = 10;
-	[SerializeField] private float projectileRepeatRate = 0.3f;
+	public GameObject laser;
+	public float projectileSpeed = 10;
+	public float projectileRepeatRate = 0.3f;
 
-	[SerializeField] private float speed = 15.0f;
-	[SerializeField] private float health = 200;
+	public float speed = 15.0f;
+	public float health = 200;
 
 	private float padding = 1;
 	private float xmax = -5;

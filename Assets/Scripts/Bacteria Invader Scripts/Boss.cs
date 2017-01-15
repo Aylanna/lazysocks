@@ -9,12 +9,10 @@ public class Boss : MonoBehaviour
 	[SerializeField] private float shotsPerSecond = 0.3f;
 	[SerializeField] private int scoreValue = 500;
 
-	private ScoreManager scoreManager; 
 	private UIManager uiManager; 
 
 	private void Start()
 	{
-		scoreManager = GameObject.Find("Score").GetComponent<ScoreManager>();
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> (); 
 	}
 
@@ -49,7 +47,6 @@ public class Boss : MonoBehaviour
 
 	private void Die()
 	{
-		scoreManager.Score (scoreValue);
 		Destroy(gameObject);
 		uiManager.bossDead.text = "You defeated the boss and got an item!";
 		uiManager.GameOver ();
