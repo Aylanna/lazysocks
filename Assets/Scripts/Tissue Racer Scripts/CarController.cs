@@ -60,9 +60,10 @@ public class CarController : MonoBehaviour
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.tag == "EnemyCar") {
+
 			//increase score
 			GameObject enemyCar = GameObject.FindGameObjectWithTag ("EnemyCar"); 
-			enemyCar.SetActive (false);
+			Destroy (enemyCar);
 
 			ui.ScoreUpdate ();
 		}
