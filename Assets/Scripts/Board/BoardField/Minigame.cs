@@ -14,11 +14,8 @@ public class Minigame : FieldAct {
 	}
 	public override void DoFieldAction () {
 		gc.state = 7;
-		Debug.Log ("Mini Game");
 		scl.SetSceneIndex (1);
 		scl.LoadMinigame ();
-
-
-
 	}
+		
 }

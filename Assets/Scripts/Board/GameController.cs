@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public Canvas rollADice;
     public Canvas gameMenu;
 	public Canvas playerOrder;
+	public Canvas startMenu;
 	public bool isMinigamePlayed;
 	public GameObject mainScene;
     public int playerIDDice;
@@ -29,9 +30,12 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-		//orderOfPlayer = new GameObject[numbersOfPlayers];
-		//dice = GetComponent<Dice> ();
-		//bc = GetComponent<BoardController> ();
+		
+		dice = GetComponent<Dice> ();
+		bc = GetComponent<BoardController> ();
+		gameMenu.enabled = false;
+		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
+		startMenu.enabled = true;
        
     }
  
@@ -40,15 +44,11 @@ public class GameController : MonoBehaviour {
         switch(state)
         {
             // Game preparation
-		case 0:
-			orderOfPlayer = new GameObject[numbersOfPlayers];
-			dice = GetComponent<Dice> ();
-			bc = GetComponent<BoardController> ();
-			gameMenu.GetComponent<Canvas> ().enabled = false;
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
-
-
+			case 0:
+				orderOfPlayer = new GameObject[numbersOfPlayers];
+				//waiting to start the game
                 break;
+
 			//Player role for highscore
             case 1:
                 if(playerIDDice < numbersOfPlayers) {
@@ -58,39 +58,30 @@ public class GameController : MonoBehaviour {
                 {
                  SortOrderOfPlayers();
 				StartCoroutine (HighScoreState());
-                   // TestPlayerOrder();
 				isDice = false;
 				dice.SetDiceActive ();
 				dice.SetMessage ("Round: " + round.ToString());
 				 playerIDDice = 0;
 				dice.InActivateNextPlayer ();
-				StartCoroutine (RollADiceState());
-				//state = 2;
+				//StartCoroutine (RollADiceState());
 			}
 			break;
+
 		//Player dice
 		case 2:
-			//Invoke ("SetDiceCanvasActive", 1);
 			rollADice.enabled = true;
 			activePlayer = orderOfPlayer [playerIDDice];
 			if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
 				state = 10;
-
 			} else {
 				dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
 				if (isDice) {
-					//Invoke ("SetDiceCanvasInactive", 1);
-					//StartCoroutine (MoveState());
-					rollADice.enabled = false;
-					gameMenu.enabled = true;
+					StartCoroutine (SetDice());
 					isDice = false;
-					gameMenu.GetComponent<GameMenu> ().UpdateView ();
-					gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
-					gameMenu.GetComponent<Canvas> ().enabled = true;
-					state = 3;
 				}
 			}
 			break;
+
 		//Player moves
 		case 3:
 			if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
@@ -99,42 +90,46 @@ public class GameController : MonoBehaviour {
 			}
 
 			break;
+
 		//FieldAct
 		case 4:
 			bc.HandleFieldAct ();
 			break;
+
 		//ExtraDice
 		case 5:
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice!!!");
-			state = 2;
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
+			state = 11;
 			break;
+
 		//ExtraLife
 		case 6:
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life!!!");
-			activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
-			state = 10;
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
+			gameMenu.GetComponent<GameMenu> ().UpdateView ();
+			state = 11;
 			break;
+
 		//Minigame
 		case 7:
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame!!!");
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame");
 			if (isMinigamePlayed) {
 				isMinigamePlayed = false;
 				state = 10;
-
 			}
-
 			//Else Wait for the end of the minigame
 			break;
+
 		//FieldAction Movement
 		case 8:
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Move!!!");
-			state = 3;
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Move");
+			state = 11;
 			break;
 
 		case 9:
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Skip!!!");
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Skip");
 			activePlayer.GetComponent<PlayerController> ().SetSkipAt (round + 1);
-			state = 10;
+			state = 11;
+		
 			break;
 
 		//next player or new round
@@ -150,35 +145,26 @@ public class GameController : MonoBehaviour {
 
 			}
 			state = 2;
-                break;
-        }
+        	break;
+
+		//waiting state1
+		case 11: 
+			break;
+		}
+
     }
 
-	/**
-	private void SetGameMenuInActive(){
-		gameMenu.GetComponent<Canvas> ().enabled = false;
+	protected IEnumerator SetDice() {
+		yield return new WaitForSeconds(2.0f);
+		rollADice.enabled = false;
+		gameMenu.enabled = true;
+
+		gameMenu.GetComponent<GameMenu> ().UpdateView ();
+		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
+		state = 3;
+
 	}
 
-    private void SetDiceCanvasInactive()
-    {
-		rollADice.GetComponent<Canvas>().enabled = false;
-    }
-
-	private void SetDiceCanvasActive()
-	{
-		rollADice.GetComponent<Canvas>().enabled = true;
-	}
-   
-
-    public void TestPlayerOrder()
-    {
-        Debug.Log("Order of Player: ");
-        foreach(GameObject p in orderOfPlayer)
-        {
-            Debug.Log(p.GetComponent<PlayerController>().playerName + "   " + p.GetComponent<PlayerController>().GetDiceValue().ToString());
-        }
-    }
-	*/
 	public void SortOrderOfPlayers()
 	{
 		Array.Sort(orderOfPlayer,
@@ -202,32 +188,14 @@ public class GameController : MonoBehaviour {
 
 	}
 
+
 	protected IEnumerator HighScoreState()
 	{
 		yield return new WaitForSeconds(1.0f);
-		rollADice.enabled = false;
-		playerOrder.enabled = true;
-		playerOrder.GetComponent<OrderOfPlayers> ().ShowOrderOfPlayer ();
-
-	}
-
-	protected IEnumerator RollADiceState()
-	{
-		yield return new WaitForSeconds(3.0f);
-		playerOrder.enabled = false;
-		rollADice.GetComponent<Canvas>().enabled = true;
 		state = 2;
 
-
 	}
 
-	protected IEnumerator MoveState()
-	{
-		yield return new WaitForSeconds(1.0f);
-		rollADice.GetComponent<Canvas>().enabled = false;
-		gameMenu.GetComponent<Canvas>().enabled = true;
 
-
-	}
 
 }

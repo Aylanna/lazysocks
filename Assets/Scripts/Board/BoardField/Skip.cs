@@ -10,7 +10,13 @@ public class Skip : FieldAct {
 	}
 	public override void DoFieldAction () {
 		gc.state = 9;
-		Debug.Log ("Skip");
+		StartCoroutine (StartWaitingState());
+
+	}
+
+	protected IEnumerator StartWaitingState() {
+		yield return new WaitForSeconds(2.0f);
+		gc.state = 10;
 
 	}
 }

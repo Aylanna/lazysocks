@@ -9,8 +9,15 @@ public class ExtraLife : FieldAct {
 
 	}
 	public override void DoFieldAction () {
+		gc.activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
 		gc.state = 6;
-		Debug.Log ("Extra Life");
+		StartCoroutine (StartWaitingState());
+
+	}
+
+	protected IEnumerator StartWaitingState() {
+		yield return new WaitForSeconds(2.0f);
+		gc.state = 10;
 
 	}
 }

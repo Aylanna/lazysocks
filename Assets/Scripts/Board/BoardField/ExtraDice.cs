@@ -11,7 +11,14 @@ public class ExtraDice : FieldAct {
 	}
 	public override void DoFieldAction () {
 		gc.state = 5;
-	 Debug.Log ("Extra Dice");
+		StartCoroutine (StartWaitingState());
+	 
+
+	}
+
+	protected IEnumerator StartWaitingState() {
+		yield return new WaitForSeconds(2.0f);
+		gc.state = 2;
 
 	}
 }

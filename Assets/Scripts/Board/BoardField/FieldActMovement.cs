@@ -10,8 +10,14 @@ public class FieldActMovement : FieldAct {
 	}
 	public override void DoFieldAction () {
 		int steps = Random.Range(-3, 4);
-		Debug.Log ("Steps: " + steps);
 		gc.activePlayer.GetComponent<PlayerController> ().SetDiceValue (steps);
 		gc.state = 8;
+		StartCoroutine (StartWaitingState());
+	}
+
+	protected IEnumerator StartWaitingState() {
+		yield return new WaitForSeconds(2.0f);
+		gc.state = 3;
+
 	}
 }

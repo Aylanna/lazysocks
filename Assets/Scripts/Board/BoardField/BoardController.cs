@@ -21,8 +21,6 @@ public class BoardController : MonoBehaviour {
 		if(!move.GetMove()) {
 			FieldAct field = move.GetCurrentField ().GetComponent<FieldAct>();
 			field.DoFieldAction ();
-			//Debug.Log (field.transform.position);
-
 			return true;
 		}
 		return false;

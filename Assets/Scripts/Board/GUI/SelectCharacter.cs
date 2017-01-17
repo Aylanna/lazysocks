@@ -23,14 +23,7 @@ public class SelectCharacter : MonoBehaviour {
         rollADice.GetComponent<Canvas>().enabled = false;
         SetToggleNotActive();
     }
-
-    void Update()
-    {
-      
-    
-       
-        
-    }
+		
 
     void SetToggleNotActive()
     {
@@ -73,7 +66,7 @@ public class SelectCharacter : MonoBehaviour {
 		if (counter > controller.numbersOfPlayers)
 		{
 			SetActivePlayers ();
-			selectCharacter.GetComponent<Canvas>().enabled = false;
+			selectCharacter.enabled = false;
 			controller.state = 1;
 		}          
     }
