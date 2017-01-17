@@ -9,6 +9,8 @@ public class BallBehavior : MonoBehaviour {
 	bool gameStarted = false;
 
 	public UiManagerBrickBreaker ui; 
+	public GameObject tapSprite; 
+
 
 	// Update is called once per frame
 	void Update () {
@@ -30,6 +32,7 @@ public class BallBehavior : MonoBehaviour {
 		if ((Input.GetKeyUp (KeyCode.Space) && gameStarted == false) || (Input.touchCount > 0 && gameStarted == false) ) {
 			transform.SetParent(null);
 			rb.isKinematic = false;
+			tapSprite.SetActive (false);
 			rb.AddForce (new Vector2 (ballForce, ballForce));
 			gameStarted = true;
 		}

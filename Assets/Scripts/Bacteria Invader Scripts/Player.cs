@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI; 
 
 public class Player : MonoBehaviour 
 {
-	[SerializeField] private GameObject laser;
-	[SerializeField] private float projectileSpeed = 10;
-	[SerializeField] private float projectileRepeatRate = 0.3f;
+	public GameObject laser;
+	public float projectileSpeed = 10;
+	public float projectileRepeatRate = 0.3f;
 
-	[SerializeField] private float speed = 15.0f;
-	[SerializeField] private float health = 200;
+	public float speed = 15.0f;
+	public float health = 200;
 
 	private float padding = 1;
 	private float xmax = -5;
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
 	private bool currentPlatformAndroid = false;
 
 	private Rigidbody2D rb;
-
+	private Slider playerHealth; 
 	private UIManager uiManager; 
 
 	private void Start()
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
 
 		position = transform.position; 
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> ();
+		playerHealth = GameObject.Find ("PlayerSlider").GetComponent<Slider> (); 
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
 		xmin = camera.ViewportToWorldPoint(new Vector3(0,0,distance)).x + padding;
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
 		if(missile)
 		{
 			health -= missile.GetDamage();
+			playerHealth.value = health; 
 			missile.Hit();
 			if (health <= 0) {
 				Die();

@@ -17,7 +17,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 
 	private bool gameOver;
 	private int score;
-	private int neededScore = 24;
+	private int neededScore = 20;
 	private Sceneloader scl;
 	private bool extraLife;
 

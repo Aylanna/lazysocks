@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
 	public GameObject mainMenuPanel;
 	public GameObject gameOverPanel;
 
-	public Text gameOverScoreText;
 	public Text bossDead; 
 
 	private int score;  
@@ -32,16 +31,12 @@ public class UIManager : MonoBehaviour
 		gameOverPanel = GameObject.Find("GameOverPanel");
 		gameOverPanel.SetActive(false);
 
-		score = ScoreManager.score;  
-
 		gameOver = false;
-
 	}
 
 	public void GameOver()
 	{
 		gameOver = true;
-		gameOverScoreText.text = "Your score: " + score;
 
 		gameOverPanel.SetActive(true);
 		Pause();

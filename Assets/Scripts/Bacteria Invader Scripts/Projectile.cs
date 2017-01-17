@@ -4,7 +4,7 @@ using System.Collections;
 public class Projectile : MonoBehaviour 
 {
 
-	[SerializeField] private float damage = 100f;
+	public float damage = 100f;
 
 	public float GetDamage()
 	{

@@ -32,7 +32,7 @@ public class UIManagerT : MonoBehaviour
 
 		gameOver = false;
 		score = 0;
-		//InvokeRepeating ("ScoreUpdate", 1.0f, 0.5f);
+
 	}
 	
 	// Update is called once per frame

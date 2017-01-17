@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour 
 {
-	[SerializeField] private GameObject projectile;
-	[SerializeField] private float projectileSpeed = 10f;
-	[SerializeField] private float health = 150f;
-	[SerializeField] private float shotsPerSecond = 0.3f;
-	[SerializeField] private int scoreValue = 500;
+	public GameObject projectile;
+	public float projectileSpeed = 10f;
+	public float health = 150f;
+	public float shotsPerSecond = 0.3f;
+	public int scoreValue = 500;
 
-	private ScoreManager scoreManager; 
 	private UIManager uiManager; 
+	private Slider bossHealthSlider;
 
 	private void Start()
 	{
-		scoreManager = GameObject.Find("Score").GetComponent<ScoreManager>();
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> (); 
+		bossHealthSlider = GameObject.Find ("Slider").GetComponent<Slider> ();
+
+		Debug.Log (bossHealthSlider);
 	}
 
 	private void Update()
@@ -38,8 +41,10 @@ public class Boss : MonoBehaviour
 		Projectile missile = collider.gameObject.GetComponent<Projectile>();
 
 		if(missile)
-		{
+		{ 
 			health -= missile.GetDamage();
+		
+			bossHealthSlider.value = health;
 			missile.Hit();
 			if (health <= 0) {
 				Die();
@@ -49,7 +54,6 @@ public class Boss : MonoBehaviour
 
 	private void Die()
 	{
-		scoreManager.Score (scoreValue);
 		Destroy(gameObject);
 		uiManager.bossDead.text = "You defeated the boss and got an item!";
 		uiManager.GameOver ();
