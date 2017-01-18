@@ -37,7 +37,7 @@ public class UIManagerD : MonoBehaviour
 	public void GameOverBossDefeat()
 	{
 		gameOver = true;
-		gameOverText.text = "You got the magic toilet brush! Thus defeated the boss and got the item.";
+		gameOverText.text = "Good Job You defeated the boss!" + '\n' + " You got the magic toilet brush!";
 
 		gameOverPanel.SetActive(true);
 		Pause();
