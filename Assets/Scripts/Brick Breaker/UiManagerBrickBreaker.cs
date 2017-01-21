@@ -9,7 +9,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	public Button[] buttons;
 	public GameObject mainMenuPanel;
 	public GameObject gameOverPanel;
-	public GameObject additiveScene;
+	private DestroyBrickBreaker scene;
 
 	public Text scoreText;
 	public Text gameOverScoreText;
@@ -18,8 +18,10 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	private bool gameOver;
 	private int score;
 	private int neededScore = 20;
-	private Sceneloader scl;
-	private bool extraLife;
+
+	public Sceneloader scl;
+	public bool extraLife;
+
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +29,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 		mainMenuPanel = GameObject.Find("MainMenuPanel");
 		Time.timeScale = 0;
 		mainMenuPanel.SetActive(true);
-
+		scene = GameObject.Find("BrickBreaker").GetComponent<DestroyBrickBreaker> ();
 		//set the game over panel as disabled from the start
 		gameOverPanel = GameObject.Find("GameOverPanel");
 		gameOverPanel.SetActive(false);
@@ -88,10 +90,10 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 
 	public void BackToBoard()
 	{
-	    scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetExtraLife (extraLife);
-		scl.UnLoadMinigame ();
-		Destroy (additiveScene);
+		//scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		//gameObject.SendMessage ("WashMe", 0, SendMessageOptions.DontRequireReceiver);
+		scene.DestroyScene ();
+
 	}
 
 }

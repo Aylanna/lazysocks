@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour {
 		case 2:
 			rollADice.enabled = true;
 			activePlayer = orderOfPlayer [playerIDDice];
+			Debug.Log ("Player dice");
 			if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
 				state = 10;
 			} else {
@@ -170,6 +171,7 @@ public class GameController : MonoBehaviour {
 
 	protected IEnumerator SetDice() {
 		yield return new WaitForSeconds(2.0f);
+		Debug.Log ("Player dice coroutine");
 		rollADice.enabled = false;
 		gameMenu.enabled = true;
 

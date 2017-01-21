@@ -16,7 +16,8 @@ public class UIManagerD : MonoBehaviour
 
 	public GameObject additiveScene;
 	private Sceneloader scl;
-	private bool extraLife;
+	private bool loseLifePoint;
+	private bool item;
 
 
 	// Use this for initialization
@@ -38,7 +39,7 @@ public class UIManagerD : MonoBehaviour
 	{
 		gameOver = true;
 		gameOverText.text = "Good Job You defeated the boss!" + '\n' + " You got the magic toilet brush!";
-
+		item = true;
 		gameOverPanel.SetActive(true);
 		Pause();
 	}
@@ -47,7 +48,7 @@ public class UIManagerD : MonoBehaviour
 	{
 		gameOver = true;
 		gameOverText.text = "You didnt defeat the boss";
-
+		loseLifePoint = true;
 		gameOverPanel.SetActive(true);
 		Pause();
 	}
@@ -73,7 +74,8 @@ public class UIManagerD : MonoBehaviour
 	public void BackToBoard()
 	{
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetExtraLife (extraLife);
+		scl.SetLoseLifePoint (loseLifePoint);
+		scl.SetItem (item);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
 	}

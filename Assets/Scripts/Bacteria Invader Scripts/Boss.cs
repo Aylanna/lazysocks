@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
 	private UIManager uiManager; 
 	private Slider bossHealthSlider;
 
+	public GameObject parentObject;
+
 	private void Start()
 	{
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> (); 
@@ -33,6 +35,7 @@ public class Boss : MonoBehaviour
 	private void Fire()
 	{
 		GameObject laser = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+		laser.transform.parent = parentObject.transform;
 		laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-projectileSpeed);
 	}
 

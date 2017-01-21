@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class DonkeyKong : BoardField {
 
-	/**
-	public override void DoFieldAction () {
+
+	public override void DoFieldAction() {
 		gc.state = 7;
 		scl.SetSceneIndex (6);
 		scl.LoadMinigame ();
-	}
-	*/
-	public override void DoFieldAction() {
-
 	}
 }
