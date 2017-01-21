@@ -56,6 +56,8 @@ public class Boss : MonoBehaviour
 	{
 		Destroy(gameObject);
 		uiManager.bossDead.text = "You defeated the boss and got an item!";
+		uiManager.item = true;
+		uiManager.lifePoint = false;
 		uiManager.GameOver ();
 	}
 }

@@ -10,7 +10,7 @@ public class GameMenu : MonoBehaviour {
 	public Text lifePointText;
 	public Image img;
 	public Text gameMessage;
-
+	public Text item;
 
 	void Start () {
 		gc = GameObject.Find("GameController").GetComponent<GameController> ();

@@ -11,15 +11,44 @@ public class Movement : MonoBehaviour {
 	public string pathName;
 	private bool move;
 	private GameObject currentField;
+	private static int bossBattle1 = 11;
+	private static int bossBattle2 = 31;
+	private static int bossBattle3 = 51;
 
-	void Start() {
-	//	pathToFollow = GameObject.Find (pathName).GetComponent<EditorPath>();
 
-	}
 
 	void Update() {
 		if (!move)
 			return;
+		CheckForGoal ();
+		CheckBossBattle ();
+		Move ();
+		
+	}
+
+	void CheckForGoal() {
+		//Is Goal reached
+		if (currentWayPointID > pathToFollow.pathObjs.Count) {
+			currentWayPointID = pathToFollow.pathObjs.Count - 1;
+			gameObject.GetComponent<PlayerController> ().SetGameWon (true);
+		}
+	}
+
+	void CheckBossBattle() {
+		if (currentWayPointID >= bossBattle1
+		   && !gameObject.GetComponent<PlayerController> ().IsBossBattle1 ())
+			currentWayPointID = bossBattle1;
+		
+		if (currentWayPointID >= bossBattle2
+			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle2 ())
+			currentWayPointID = bossBattle2;
+
+		if (currentWayPointID >= bossBattle3
+			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle3 ())
+			currentWayPointID = bossBattle3;
+	}
+
+	void Move() {
 		if (transform.position != pathToFollow.pathObjs [currentWayPointID].position) {
 			transform.position = Vector3.Lerp (transform.position, pathToFollow.pathObjs [currentWayPointID].position, Time.deltaTime * speed);
 		} else {

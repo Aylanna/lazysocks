@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour {
     public int numbersOfPlayers = 0;
     public GameObject[] orderOfPlayer;
     public bool isDice = false;
+	public bool deactivateDice;
     private Dice dice;
 	private int round = 1;
 	public GameObject startField;
@@ -44,8 +45,9 @@ public class GameController : MonoBehaviour {
         switch(state)
         {
             // Game preparation
-			case 0:
-				orderOfPlayer = new GameObject[numbersOfPlayers];
+		case 0:
+			orderOfPlayer = new GameObject[numbersOfPlayers];
+		//	startMenu.enabled = true;
 				//waiting to start the game
                 break;
 
@@ -56,14 +58,14 @@ public class GameController : MonoBehaviour {
                 }
                 else
                 {
-                 SortOrderOfPlayers();
+                SortOrderOfPlayers();
 				StartCoroutine (HighScoreState());
 				isDice = false;
 				dice.SetDiceActive ();
 				dice.SetMessage ("Round: " + round.ToString());
-				 playerIDDice = 0;
+				playerIDDice = 0;
 				dice.InActivateNextPlayer ();
-				//StartCoroutine (RollADiceState());
+			
 			}
 			break;
 
@@ -86,7 +88,11 @@ public class GameController : MonoBehaviour {
 		case 3:
 			if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
 				bc.HandleBoardEvent ();
-				state = 4; 
+				if (activePlayer.GetComponent<PlayerController> ().IsGameWon ()){
+					state = 12;
+			} else {
+						state = 4; 
+					}
 			}
 
 			break;
@@ -99,6 +105,7 @@ public class GameController : MonoBehaviour {
 		//ExtraDice
 		case 5:
 			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
+			deactivateDice = false;
 			state = 11;
 			break;
 
@@ -136,21 +143,28 @@ public class GameController : MonoBehaviour {
 		case 10:
 			if (playerIDDice < orderOfPlayer.Length - 1) {
 				playerIDDice++;
-					
 			} else {
 				playerIDDice = 0;
 				round++;
 				RemoveSkip ();
 				dice.SetMessage ("Round: " + round.ToString());
-
 			}
+			deactivateDice = false;
+			dice.SetStartDice ();
 			state = 2;
         	break;
 
 		//waiting state1
 		case 11: 
 			break;
+
+		case 12: 
+			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (activePlayer.GetComponent<PlayerController> ().playerName + " Won!");
+			state = 0;
+			break;
 		}
+
+
 
     }
 
@@ -171,12 +185,25 @@ public class GameController : MonoBehaviour {
 			delegate (GameObject player1, GameObject player2) { return - player1.GetComponent<PlayerController>().GetDiceValue().
 				CompareTo(player2.GetComponent<PlayerController>().GetDiceValue()); });
 	}
+
+	public bool isEqualHighScore() {
+		for (int i = 0; i < orderOfPlayer.Length; i++) {
+			if (activePlayer.GetComponent<PlayerController>().GetDiceValue() == orderOfPlayer [i].GetComponent<PlayerController>().GetDiceValue()
+				&& playerIDDice != i) {
+				return true;
+			}
+
+		}
+		return false;
+
+	}
  
 
 	void DiceForHighscore() {
 		rollADice.GetComponent<Canvas>().enabled = true;
 		activePlayer = orderOfPlayer [playerIDDice];
 		dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
+		deactivateDice = false;
 	}
 
 	void RemoveSkip() {

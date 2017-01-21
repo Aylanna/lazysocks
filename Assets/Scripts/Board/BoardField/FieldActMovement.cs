@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FieldActMovement : FieldAct {
+public class FieldActMovement : BoardField {
 
-	private GameController gc;
-	void Start() {
-		gc = GameObject.Find("GameController").GetComponent<GameController> ();
 
-	}
 	public override void DoFieldAction () {
 		int steps = Random.Range(-3, 4);
 		gc.activePlayer.GetComponent<PlayerController> ().SetDiceValue (steps);

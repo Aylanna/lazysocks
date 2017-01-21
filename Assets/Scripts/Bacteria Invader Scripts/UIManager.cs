@@ -16,7 +16,8 @@ public class UIManager : MonoBehaviour
 	private bool gameOver;
 
 	private Sceneloader scl;
-	private bool lifePoint;
+	public bool lifePoint = true;
+	public bool item;
 	public GameObject additiveScene;
 
 	// Use this for initialization
@@ -63,7 +64,8 @@ public class UIManager : MonoBehaviour
 	public void BackToBoard()
 	{
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetExtraLife (lifePoint);
+		scl.SetLoseLifePoint (lifePoint);
+		scl.SetItem (item);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
 	}

@@ -12,6 +12,7 @@ public class UIManagerM : MonoBehaviour
 	public GameObject additiveScene;
 	private Sceneloader scl;
 	private bool lifePoint;
+	private bool item;
 	public Text gameOverText;
 
 	private bool gameOver;
@@ -36,7 +37,7 @@ public class UIManagerM : MonoBehaviour
 	{
 		gameOver = true;
 		gameOverText.text = "You mached every card and defeated the Boss!";
-
+		item = true;
 		gameOverPanel.SetActive(true);
 		Pause();
 	}
@@ -45,7 +46,7 @@ public class UIManagerM : MonoBehaviour
 	{
 		gameOver = true;
 		gameOverText.text = "You didnt defeat the boss and have no lives anymore :(";
-
+		lifePoint = true;
 		gameOverPanel.SetActive(true);
 		Pause();
 	}
@@ -72,6 +73,7 @@ public class UIManagerM : MonoBehaviour
 	{
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife (lifePoint);
+		scl.SetItem (item);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
 	}

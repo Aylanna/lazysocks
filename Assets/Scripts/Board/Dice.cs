@@ -45,38 +45,43 @@ public class Dice : MonoBehaviour {
    
     public void RollDice()
     {
-        int index = Random.Range(1, 7);
-        dice.interactable = true;
-        switch(index)
-        {
-            case 1:
-                dice.image.sprite = sprites[0];
-                break;
-            case 2:
-                dice.image.sprite = sprites[1];
-                break;
-            case 3:
-                dice.image.sprite = sprites[2];
-                break;
-            case 4:
-                dice.image.sprite = sprites[3];
-                break;
-            case 5:
-                dice.image.sprite = sprites[4];
-                break;
-            case 6:
-                dice.image.sprite = sprites[5];
-                break;
-        }
-		if(nextPlayer.gameObject.activeSelf)
-			SetDiceInActive ();
-		controller.isDice = true;
-		if(controller.activePlayer != null)
-        	controller.activePlayer.GetComponent<PlayerController>().SetDiceValue(index);
+		if (!controller.deactivateDice) {
+			controller.deactivateDice = true;
+		int index = Random.Range (1, 7);
+			dice.interactable = true;
+			switch (index) {
+			case 1:
+				dice.image.sprite = sprites [0];
+				break;
+			case 2:
+				dice.image.sprite = sprites [1];
+				break;
+			case 3:
+				dice.image.sprite = sprites [2];
+				break;
+			case 4:
+				dice.image.sprite = sprites [3];
+				break;
+			case 5:
+				dice.image.sprite = sprites [4];
+				break;
+			case 6:
+				dice.image.sprite = sprites [5];
+				break;
+			}
+			if (nextPlayer.gameObject.activeSelf)
+				SetDiceInActive ();
+			controller.isDice = true;
+			if (controller.activePlayer != null)
+				controller.activePlayer.GetComponent<PlayerController> ().SetDiceValue (index);
+		}
     }
 
 	public void SetNextPlayer() {
-	   controller.playerIDDice++;
+		if (!controller.isEqualHighScore ()) {
+			controller.playerIDDice++;
+		}
+		SetStartDice ();
 		SetDiceActive ();
 		if (controller.playerIDDice == controller.numbersOfPlayers) {
 			SetDiceInActive ();
@@ -88,5 +93,9 @@ public class Dice : MonoBehaviour {
 	public void InActivateNextPlayer() {
 		nextPlayer.gameObject.SetActive (false);
 
+	}
+
+	public void SetStartDice() {
+		dice.image.sprite = sprites [0];
 	}
 }
