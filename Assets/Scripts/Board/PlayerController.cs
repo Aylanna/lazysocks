@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	public int startLifePoints = 1;
 	public GameObject startfield;
 	private int lifePoints = 1;
-	//public Transform position;
 	private int items;
 	private bool bossBattle1;
 	private bool bossBattle2;
@@ -53,7 +52,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void LifePointsManager() {
-		int life = Random.Range (1, -2);
+		//int life = Random.Range (1, -2);
+		int life = -1;
 		switch (life) {
 
 		case 1: 
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour {
 		lifePoints--;
 		if (lifePoints <= 0) {
 			transform.position = startfield.transform.position;
+			lifePoints = 1;
 		}
 	}
 
@@ -88,8 +89,8 @@ public class PlayerController : MonoBehaviour {
 		return skipAt;
 	}
 
-	public void SetItem() {
-		this.items ++;
+	public void SetItem(int item) {
+		this.items = item;
 	}
 
 	public int GetItem() {
@@ -102,5 +103,24 @@ public class PlayerController : MonoBehaviour {
 
 	public bool IsGameWon() {
 		return wonGame;
+	}
+
+	public bool IsPlayerInBossBattleState() {
+		if (bossBattle1) {
+			Debug.Log ("Boss1");
+			return true;
+		} else {
+			if (bossBattle2) {
+				Debug.Log ("Boss2");
+				return true;
+			} else {
+				if (bossBattle3) {
+					Debug.Log ("Boss3");
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
 	}
 }

@@ -11,7 +11,7 @@ public class NumbersOfPlayer : MonoBehaviour {
 
     private PlayerController player;
     private GameController controller;
-    
+	private bool isChoose;
     private Toggle[] numbersOfPlayers;
 
     void Start () {
@@ -32,6 +32,7 @@ public class NumbersOfPlayer : MonoBehaviour {
         {
 			if (t.isOn) {
 				controller.numbersOfPlayers = int.Parse (t.GetComponentInChildren<Text> ().text);
+				isChoose = true;
 			}
 
         }
@@ -40,9 +41,11 @@ public class NumbersOfPlayer : MonoBehaviour {
     public void Submit()
     {
         IsNumbersOfPlayersToggleActive();
-		numbersOfPlayer.enabled = false;
-
-        selectCharacter.enabled = true;
+		if (isChoose) {
+			isChoose = false;
+			numbersOfPlayer.enabled = false;
+			selectCharacter.enabled = true;
+		}
     }
 
 

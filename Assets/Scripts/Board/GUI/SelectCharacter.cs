@@ -13,6 +13,7 @@ public class SelectCharacter : MonoBehaviour {
     private PlayerController player;
     private GameController controller;
 	private Toggle activeToggle;
+	private bool isCharacterChoose;
 
     private Toggle[] characters;
 
@@ -42,6 +43,7 @@ public class SelectCharacter : MonoBehaviour {
                 controller.players[i].SetActive(true);
 				characters [i].enabled = false;  
 				characters [i].gameObject.SetActive (false);
+				isCharacterChoose = true;
             }
         }
     }
@@ -59,15 +61,17 @@ public class SelectCharacter : MonoBehaviour {
 
     public void Submit()
     {
-        counter++;
         IsCharacterToggleActive();
-        messageText.text = "Player " + counter;
-        SetToggleNotActive();  
-		if (counter > controller.numbersOfPlayers)
-		{
-			SetActivePlayers ();
-			selectCharacter.enabled = false;
-			controller.state = 1;
-		}          
+		if (isCharacterChoose) {
+			counter++;
+			isCharacterChoose = false;
+			messageText.text = "Player " + counter;
+			SetToggleNotActive ();  
+			if (counter > controller.numbersOfPlayers) {
+				SetActivePlayers ();
+				selectCharacter.enabled = false;
+				controller.state = 1;
+			}    
+		}
     }
 }

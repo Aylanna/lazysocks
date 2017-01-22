@@ -75,7 +75,7 @@ public class Dice : MonoBehaviour {
 			if (controller.activePlayer != null)
 				controller.activePlayer.GetComponent<PlayerController> ().SetDiceValue (index);
 		}
-		Debug.Log ("Dice");
+
     }
 
 	public void SetNextPlayer() {

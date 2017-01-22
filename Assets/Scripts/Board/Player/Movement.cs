@@ -22,29 +22,39 @@ public class Movement : MonoBehaviour {
 			return;
 		CheckForGoal ();
 		CheckBossBattle ();
+		CheckIsDead ();
 		Move ();
 		
 	}
 
+	void CheckIsDead (){
+		if (gameObject.GetComponent<PlayerController> ().GetLifePoints () <= 0 && transform.position != pathToFollow.pathObjs [0].position) {
+			currentWayPointID = 0;
+		}
+	}
+
 	void CheckForGoal() {
 		//Is Goal reached
-		if (currentWayPointID > pathToFollow.pathObjs.Count) {
+		if (currentWayPointID >= pathToFollow.pathObjs.Count) {
 			currentWayPointID = pathToFollow.pathObjs.Count - 1;
 			gameObject.GetComponent<PlayerController> ().SetGameWon (true);
+			Debug.Log ("Game Finish!");
 		}
 	}
 
 	void CheckBossBattle() {
 		if (currentWayPointID >= bossBattle1
-		   && !gameObject.GetComponent<PlayerController> ().IsBossBattle1 ())
+			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle1 () && gameObject.GetComponent<PlayerController> ().GetItem() == 0)
 			currentWayPointID = bossBattle1;
 		
 		if (currentWayPointID >= bossBattle2
-			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle2 ())
+		    && !gameObject.GetComponent<PlayerController> ().IsBossBattle2 () && gameObject.GetComponent<PlayerController> ().GetItem () == 1) {
 			currentWayPointID = bossBattle2;
+			Debug.Log ("waypoint battle 2");
+		}
 
 		if (currentWayPointID >= bossBattle3
-			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle3 ())
+			&& !gameObject.GetComponent<PlayerController> ().IsBossBattle3 () && gameObject.GetComponent<PlayerController> ().GetItem() == 2)
 			currentWayPointID = bossBattle3;
 	}
 

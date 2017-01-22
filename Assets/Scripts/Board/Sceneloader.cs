@@ -28,7 +28,7 @@ public class Sceneloader : MonoBehaviour {
 
 				
 		if (item)
-			gc.activePlayer.GetComponent<PlayerController> ().SetItem ();
+			gc.activePlayer.GetComponent<PlayerController> ().SetItem (1);
 			
 	
 	}

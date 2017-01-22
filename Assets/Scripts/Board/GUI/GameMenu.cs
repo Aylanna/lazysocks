@@ -18,6 +18,7 @@ public class GameMenu : MonoBehaviour {
 
 	public void UpdateView() {
 		lifePointText.text = gc.activePlayer.GetComponent<PlayerController> ().GetLifePoints().ToString();
+		item.text = gc.activePlayer.GetComponent<PlayerController> ().GetItem ().ToString ();
 		img.sprite = gc.activePlayer.GetComponentInChildren<SpriteRenderer> ().sprite;
 	}
 
