@@ -8,8 +8,6 @@ public class Enemy : MonoBehaviour
 	public float health = 150f;
 	public float shotsPerSecond = 0.3f;
 	public int scoreValue = 100;
-	public GameObject parentObject;
-
 
 	private void Update()
 	{
@@ -23,7 +21,6 @@ public class Enemy : MonoBehaviour
 	private void Fire()
 	{
 		GameObject laser = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
-		laser.transform.parent = parentObject.transform;
 		laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-projectileSpeed);
 	}
 	
