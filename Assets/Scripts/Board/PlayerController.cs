@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 	private bool bossBattle2;
 	private bool bossBattle3;
 	private bool wonGame;
+	private bool isExtraLife;
+	private bool isDying;
 
 
     public void SetDiceValue(int diceValue)
@@ -52,12 +54,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void LifePointsManager() {
-		//int life = Random.Range (1, -2);
-		int life = -1;
+		int life = Random.Range (1, -2);
 		switch (life) {
-
 		case 1: 
 			AddLifePoints ();
+			isExtraLife = true;
 			break;
 		case -1:
 			ReduceLifePoints ();
@@ -66,15 +67,27 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	public void AddLifePoints() {
-		lifePoints++;
+		this.lifePoints++;
 	}
 
 	public void ReduceLifePoints() {
-		lifePoints--;
+		this.lifePoints--;
 		if (lifePoints <= 0) {
-			transform.position = startfield.transform.position;
+			isDying = true;
 			lifePoints = 1;
 		}
+	}
+
+	public bool IsExtraLife() {
+		return isExtraLife;
+	}
+
+	public bool IsDying() {
+		return isDying;
+	}
+
+	public void SetDying(bool isDying) {
+		this.isDying = isDying;
 	}
 
 	public int GetLifePoints() {

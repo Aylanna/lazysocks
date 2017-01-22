@@ -22,15 +22,18 @@ public class Movement : MonoBehaviour {
 			return;
 		CheckForGoal ();
 		CheckBossBattle ();
-		CheckIsDead ();
+		//CheckIsDead ();
 		Move ();
 		
 	}
 
-	void CheckIsDead (){
-		if (gameObject.GetComponent<PlayerController> ().GetLifePoints () <= 0 && transform.position != pathToFollow.pathObjs [0].position) {
+	public void CheckIsDead (){
+		//if (gameObject.GetComponent<PlayerController> ().IsDying() ) {
+		//	Debug.Log ("Waypoit dead!");
+			gameObject.GetComponent<PlayerController> ().SetDying (false);
 			currentWayPointID = 0;
-		}
+			transform.position = pathToFollow.pathObjs [currentWayPointID].position;
+		//}
 	}
 
 	void CheckForGoal() {
@@ -38,7 +41,6 @@ public class Movement : MonoBehaviour {
 		if (currentWayPointID >= pathToFollow.pathObjs.Count) {
 			currentWayPointID = pathToFollow.pathObjs.Count - 1;
 			gameObject.GetComponent<PlayerController> ().SetGameWon (true);
-			Debug.Log ("Game Finish!");
 		}
 	}
 
@@ -50,7 +52,7 @@ public class Movement : MonoBehaviour {
 		if (currentWayPointID >= bossBattle2
 		    && !gameObject.GetComponent<PlayerController> ().IsBossBattle2 () && gameObject.GetComponent<PlayerController> ().GetItem () == 1) {
 			currentWayPointID = bossBattle2;
-			Debug.Log ("waypoint battle 2");
+
 		}
 
 		if (currentWayPointID >= bossBattle3

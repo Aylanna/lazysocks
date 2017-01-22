@@ -5,7 +5,10 @@ using UnityEngine;
 public class NormalField : BoardField {
 	
 	public override void DoFieldAction () {
-		gc.state = 10;
+		if (gc.activePlayer.GetComponent<PlayerController> ().IsGameWon ())
+			gc.state = 12;
+		else
+			gc.state = 10;
 
 	}
 

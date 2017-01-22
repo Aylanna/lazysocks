@@ -75,6 +75,9 @@ public class GameController : MonoBehaviour {
 		case 2:
 			Debug.Log ("State 2");
 			activePlayer = orderOfPlayer [playerIDDice];
+			if (activePlayer.GetComponent<PlayerController> ().IsDying ()) {
+				activePlayer.GetComponent<Movement> ().CheckIsDead ();
+			}
 			if (!activePlayer.GetComponent<PlayerController> ().IsPlayerInBossBattleState ()) {
 				rollADice.enabled = true;
 	
@@ -98,6 +101,7 @@ public class GameController : MonoBehaviour {
 		//Player moves
 		case 3:
 			Debug.Log ("State 3");
+
 			if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
 				bc.HandleBoardEvent ();
 				if (activePlayer.GetComponent<PlayerController> ().IsGameWon ()){
@@ -113,8 +117,8 @@ public class GameController : MonoBehaviour {
 		case 4:
 			Debug.Log ("State 4");
 			bc.HandleFieldAct ();
-			if(activePlayer.GetComponent<PlayerController>().GetLifePoints() <= 0)
-				gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("You died!");
+
+
 			//Test Data
 
 			break;
@@ -130,7 +134,16 @@ public class GameController : MonoBehaviour {
 		//ExtraLife
 		case 6:
 			Debug.Log ("State 6");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
+
+				if (activePlayer.GetComponent<PlayerController> ().IsExtraLife ()) {
+					gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
+				} else {
+						gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Lost Life");
+				if (activePlayer.GetComponent<PlayerController> ().IsDying()) {
+						gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("You died!");
+				} 
+					
+			}
 			gameMenu.GetComponent<GameMenu> ().UpdateView ();
 			state = 11;
 			break;
