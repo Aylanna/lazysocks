@@ -13,6 +13,7 @@ public class MemoryController : MonoBehaviour {
 	public MemoryCard originalCard;
 	public Sprite[] images;
 	public Slider bossHealthSlider;
+	public GameObject parentObject; 
 
 	private MemoryCard firstRevealed;
 	private MemoryCard secondRevealed;
@@ -49,6 +50,7 @@ public class MemoryController : MonoBehaviour {
 					card = originalCard;
 				} else {
 					card = Instantiate (originalCard) as MemoryCard;
+					card.transform.parent = parentObject.transform; 
 				}
 
 				int index = j * gridCols + i;

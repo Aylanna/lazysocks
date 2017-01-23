@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 	private Slider playerHealth; 
 	private UIManager uiManager; 
 
+	public GameObject parentObject; 
+
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody2D> ();
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
 	private void Fire()
 	{
 		GameObject beam = Instantiate(laser, transform.position, Quaternion.identity) as GameObject;
+		beam.transform.parent = parentObject.transform;
 		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);
 	}
 

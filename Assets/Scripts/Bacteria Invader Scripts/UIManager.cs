@@ -19,13 +19,10 @@ public class UIManager : MonoBehaviour
 	public bool lifePoint = true;
 	public bool item;
 	public GameObject additiveScene;
-	public GameObject[] remaininglasers; 
 
 	// Use this for initialization
 	void Start ()
 	{
-		remaininglasers = GameObject.FindGameObjectsWithTag ("Laser"); 
-
 		//set mainmenu panel as active from the start and set the time scale on 0
 		mainMenuPanel = GameObject.Find("MainMenuPanel");
 		Time.timeScale = 0;
@@ -40,12 +37,6 @@ public class UIManager : MonoBehaviour
 
 	public void GameOver()
 	{
-		remaininglasers = GameObject.FindGameObjectsWithTag ("Laser"); 
-
-		for (int i = 0; i < remaininglasers.Length; i++) {
-			Destroy (remaininglasers [i].gameObject); 
-		}
-			
 		gameOver = true;
 		gameOverPanel.SetActive(true);
 		Pause();

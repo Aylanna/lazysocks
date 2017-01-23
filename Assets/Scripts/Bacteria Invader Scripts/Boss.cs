@@ -10,15 +10,16 @@ public class Boss : MonoBehaviour
 	public float shotsPerSecond = 0.3f;
 	public int scoreValue = 500;
 
+	public GameObject parentObject; 
+
 	private UIManager uiManager; 
 	private Slider bossHealthSlider;
 
 	private void Start()
 	{
+		parentObject = GameObject.Find ("LaserSpawns");  
 		uiManager = GameObject.Find ("UIManager").GetComponent<UIManager> (); 
 		bossHealthSlider = GameObject.Find ("Slider").GetComponent<Slider> ();
-
-		Debug.Log (bossHealthSlider);
 	}
 
 	private void Update()
@@ -33,7 +34,7 @@ public class Boss : MonoBehaviour
 	private void Fire()
 	{
 		GameObject laser = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
-		//laser.transform.parent = parentObject.transform;
+		laser.transform.parent = parentObject.transform;
 		laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-projectileSpeed);
 	}
 
