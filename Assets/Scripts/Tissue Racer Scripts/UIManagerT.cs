@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManagerT : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class UIManagerT : MonoBehaviour
 	private bool gameOver;
 	private int score;
     private int neededScore = 30;
+
+	private bool extralife;
+	public GameObject additiveScene;
+	private Sceneloader scl;
 
 	// Use this for initialization
 	void Start ()
@@ -62,6 +67,8 @@ public class UIManagerT : MonoBehaviour
 	    if (score >= neededScore)
 	    {
 	        extraLifeText.text = "You got an extra life";
+			extralife = true;
+
 	    }
 	    else
 	    {
@@ -92,6 +99,15 @@ public class UIManagerT : MonoBehaviour
 	
 	public void BackToBoard()
 	{
-		Application.LoadLevel(Application.loadedLevel);
+		
+		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.SetExtraLife (extralife);
+		scl.UnLoadMinigame ();
+
+		Destroy (additiveScene);
+		//Application.LoadLevel(Application.loadedLevel);
 	}
+
+
+
 }

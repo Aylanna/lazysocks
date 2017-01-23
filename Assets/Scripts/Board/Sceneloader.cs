@@ -18,6 +18,7 @@ public class Sceneloader : MonoBehaviour {
 
 	public void UnLoadMinigame () {
 		SceneManager.UnloadScene(sceneIndex);
+		//SceneManager.UnloadSceneAsync (sceneIndex);
 		gc.mainScene.SetActive (true);
 		gc.isMinigamePlayed = true;
 		if (extraLife) 
@@ -35,7 +36,17 @@ public class Sceneloader : MonoBehaviour {
 
 	public void LoadMinigame() {
 		gc.mainScene.SetActive (false);
-		SceneManager.LoadScene (sceneIndex, LoadSceneMode.Additive);
+		StartCoroutine (load());
+		//SceneManager.LoadScene (sceneIndex, LoadSceneMode.Additive);
+
+		//SceneManager.LoadScene (sceneIndex);
+		//SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
+	}
+
+	protected IEnumerator load() {
+		AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex,LoadSceneMode.Additive);
+		//async.allowSceneActivation = ;
+		yield return async;
 	}
 
 	public void SetExtraLife(bool extraLife) {

@@ -86,6 +86,7 @@ public class GameController : MonoBehaviour {
 				} else {
 					dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
 					if (isDice) {
+						
 
 
 						StartCoroutine (SetDice ());
@@ -221,6 +222,7 @@ public class GameController : MonoBehaviour {
 		gameMenu.GetComponent<GameMenu> ().UpdateView ();
 		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
 		state = 3;
+
 
 	}
 

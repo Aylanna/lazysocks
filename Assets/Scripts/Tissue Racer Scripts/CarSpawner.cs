@@ -7,6 +7,7 @@ public class CarSpawner : MonoBehaviour
 	int carNo;
 	public float maxPos = 2.25f;
 	public float delayTimer = 0.5f;
+	public GameObject parentObject;
 
 	float timer;
 
@@ -27,7 +28,8 @@ public class CarSpawner : MonoBehaviour
 		if (timer <= 0) {
 			Vector3 carPos = new Vector3(Random.Range(-2.2f,2.2f),transform.position.y,transform.position.z);
 			carNo = Random.Range (0,5);
-			Instantiate (cars[carNo], carPos, transform.rotation);
+			GameObject obj = (GameObject) Instantiate (cars[carNo], carPos, transform.rotation);
+			obj.transform.parent = parentObject.transform;
 			timer = delayTimer;
 		}
 	}
