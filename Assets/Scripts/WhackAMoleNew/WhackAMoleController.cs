@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 public class WhackAMoleController : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class WhackAMoleController : MonoBehaviour {
 	public GameObject additiveScene;
 	private Sceneloader scl;
 	private bool extraLife;
+	public Text extraLifeText; 
 
 
 	void Start () {
@@ -25,12 +27,14 @@ public class WhackAMoleController : MonoBehaviour {
 		
 		if (ic.gameOver) {
 			gameOverCanvas.enabled = true;
+			extraLifeText.text = "You were catched by the tentacle! No extra live for you..."; 
 			CancelInvoke ("CountDown");
 			spawner.StopSpawn ();
 			ic.gameOver = false;
 		}
 		if (ic.score == 3) {
 			gameOverCanvas.enabled = true;
+			extraLifeText.text = "You cleaned the hands, goodjob! You got an extra live.";
 			CancelInvoke ("CountDown");
 			spawner.StopSpawn ();
 			extraLife = true;
