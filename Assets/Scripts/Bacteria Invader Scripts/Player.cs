@@ -155,7 +155,6 @@ public class Player : MonoBehaviour
 	private void Die()
 	{
 		Destroy(gameObject);
-		uiManager.bossDead.text = "You didn't defeat the boss";
 		uiManager.GameOver ();
 	}
 }

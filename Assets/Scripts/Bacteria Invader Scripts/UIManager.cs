@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 	private bool gameOver;
 
 	private Sceneloader scl;
-	public bool lifePoint = true;
+	public bool loseLifePoint;
 	public bool item;
 	public GameObject additiveScene;
 
@@ -35,8 +35,18 @@ public class UIManager : MonoBehaviour
 		gameOver = false;
 	}
 
+	public void GameOverBossDefeated() 
+	{
+		gameOver = true; 
+		bossDead.text = "Goodjob, You defeated the boss and got an item!";
+		item = true;
+		gameOverPanel.SetActive (true); 
+	}
+
 	public void GameOver()
 	{
+		bossDead.text = "You didn't defeat the boss";
+		loseLifePoint = true; 
 		gameOver = true;
 		gameOverPanel.SetActive(true);
 	}
@@ -62,7 +72,7 @@ public class UIManager : MonoBehaviour
 	public void BackToBoard()
 	{		
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetLoseLifePoint (lifePoint);
+		scl.SetLoseLifePoint (loseLifePoint);
 		scl.SetItem (item);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);

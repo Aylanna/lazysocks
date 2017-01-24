@@ -1,13 +1,15 @@
 fileFormatVersion: 2
-guid: 2cc6a7f8d3b6afd4f9ea322dfa23d713
-timeCreated: 1484515965
+guid: 367f6102dfcc47749af95c6c8eb48257
+timeCreated: 1485291271
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bossman_0
-    21300002: bossman_1
-    21300004: bossman_2
-    21300006: bossman_3
+    21300000: dice_0
+    21300002: dice_1
+    21300004: dice_2
+    21300006: dice_3
+    21300008: dice_4
+    21300010: dice_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -70,7 +72,23 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
@@ -82,52 +100,78 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bossman_0
+      name: dice_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 33
-        height: 33
+        x: 10
+        y: 10
+        width: 44
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bossman_1
+      name: dice_1
       rect:
         serializedVersion: 2
-        x: 47
-        y: 0
-        width: 32
-        height: 33
+        x: 74
+        y: 10
+        width: 44
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bossman_2
+      name: dice_2
       rect:
         serializedVersion: 2
-        x: 89
-        y: 0
-        width: 32
-        height: 33
+        x: 138
+        y: 10
+        width: 44
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bossman_3
+      name: dice_3
       rect:
         serializedVersion: 2
-        x: 131
-        y: 0
-        width: 32
-        height: 33
+        x: 202
+        y: 10
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: dice_4
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 10
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: dice_5
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 10
+        width: 44
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
