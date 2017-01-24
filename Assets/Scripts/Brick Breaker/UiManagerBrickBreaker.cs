@@ -67,7 +67,6 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 		}
 
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void Play()

@@ -41,7 +41,6 @@ public class UIManagerD : MonoBehaviour
 		gameOverText.text = "Good Job You defeated the boss!" + '\n' + " You got the magic toilet brush!";
 		item = true;
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void GameOverNoBossDefeat()
@@ -50,7 +49,6 @@ public class UIManagerD : MonoBehaviour
 		gameOverText.text = "You didnt defeat the boss";
 		loseLifePoint = true;
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void Play()

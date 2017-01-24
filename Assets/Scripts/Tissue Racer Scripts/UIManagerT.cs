@@ -76,7 +76,6 @@ public class UIManagerT : MonoBehaviour
 	    }
 
 		gameOverPanel.SetActive(true);
-	    Pause();
 	}
 
 	public void Play()

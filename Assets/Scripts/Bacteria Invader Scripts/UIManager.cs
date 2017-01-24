@@ -39,7 +39,6 @@ public class UIManager : MonoBehaviour
 	{
 		gameOver = true;
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void Play()

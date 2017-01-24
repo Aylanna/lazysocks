@@ -39,7 +39,6 @@ public class UIManagerM : MonoBehaviour
 		gameOverText.text = "You mached every card and defeated the Boss!";
 		item = true;
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void GameOverNoBossDefeat()
@@ -48,7 +47,6 @@ public class UIManagerM : MonoBehaviour
 		gameOverText.text = "You didnt defeat the boss and have no lives anymore :(";
 		lifePoint = true;
 		gameOverPanel.SetActive(true);
-		Pause();
 	}
 
 	public void Play()
