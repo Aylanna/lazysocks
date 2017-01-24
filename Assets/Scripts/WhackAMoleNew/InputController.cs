@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class InputController : MonoBehaviour {
 
 	private bool doInputChecking = true;
 	public int score;
 	public bool gameOver;
+	 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame

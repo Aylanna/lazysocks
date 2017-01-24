@@ -28,19 +28,21 @@ public class SpawnCharacters : MonoBehaviour {
      */
 	private void InitializeSpawnPositions()
 	{
-		spawnPoints = new Vector3[10];
-		taken = new bool[10];
+		spawnPoints = new Vector3[12];
+		taken = new bool[12];
 
-		spawnPoints[0] = new Vector3(-0.203f, 0.009f, 0);
-		spawnPoints[1] = new Vector3(1.012f, 0.302f, 0);
-		spawnPoints[2] = new Vector3(-0.496f, 0.268f, 0);
-		spawnPoints[3] = new Vector3(0.207f, -0.219f, 0);
-		spawnPoints[4] = new Vector3(-1.131f, -0.32f, 0);
-		spawnPoints[5] = new Vector3(0.289f, 0.149f, 0);
-		spawnPoints[6] = new Vector3(0.8f, -0.036f, 0);
-		spawnPoints[7] = new Vector3(-0.714f, -0.114f, 0);
-		spawnPoints[8] = new Vector3(0.568f, -0.444f, 0);
-		spawnPoints[9] = new Vector3(-0.283f, -0.42f, 0);
+		spawnPoints[0] = new Vector3(-0.29f, 0.5f, 0);
+		spawnPoints[1] = new Vector3(0.37f, 0.51f, 0);
+		spawnPoints[2] = new Vector3(0.05f, 0.47f, 0);
+		spawnPoints[3] = new Vector3(-0.29f, 0.09f, 0);
+		spawnPoints[4] = new Vector3(-0.29f, -0.238f, 0);
+		spawnPoints[5] = new Vector3(0.37f, 0.07f, 0);
+		spawnPoints[6] = new Vector3(0.37f, -0.328f, 0);
+		spawnPoints[7] = new Vector3(0.37f, -0.61f, 0);
+		spawnPoints[8] = new Vector3(0.04f, 0.05f, 0);
+		spawnPoints[9] = new Vector3(-0.283f, -0.64f, 0);
+		spawnPoints[10] = new Vector3(0f, -0.71f, 0);
+		spawnPoints[11] = new Vector3(0.01f, -0.327f, 0);
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class SpawnCharacters : MonoBehaviour {
 	{
 		int spawnPoint;
 		int spawnType;
-		spawnPoint = Random.Range(0, 10);
+		spawnPoint = Random.Range(0, 12);
 	    spawnType = Random.Range(0, 9);
 
 	    

@@ -14,6 +14,7 @@ public class WhackAMoleController : MonoBehaviour {
 	private Sceneloader scl;
 	private bool extraLife;
 	public Text extraLifeText; 
+	public Text scoreText;
 
 
 	void Start () {
@@ -24,7 +25,9 @@ public class WhackAMoleController : MonoBehaviour {
 	}
 
 	void Update() {
-		
+
+		scoreText.text = "Score = " + ic.score; 
+
 		if (ic.gameOver) {
 			gameOverCanvas.enabled = true;
 			extraLifeText.text = "You were catched by the tentacle! No extra live for you..."; 
