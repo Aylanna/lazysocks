@@ -94,7 +94,6 @@ public class GameController : MonoBehaviour {
 					}
 				}
 			} else {
-				Debug.Log (activePlayer.GetComponent<PlayerController> ().playerName);
 				state = 4;
 			}
 			break;
@@ -127,7 +126,8 @@ public class GameController : MonoBehaviour {
 		//ExtraDice
 		case 5:
 			Debug.Log ("State 5");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
+			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
+			gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (1);
 			deactivateDice = false;
 			state = 11;
 			break;
@@ -137,14 +137,18 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("State 6");
 
 				if (activePlayer.GetComponent<PlayerController> ().IsExtraLife ()) {
-					gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
-				} else {
-						gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Lost Life");
-				if (activePlayer.GetComponent<PlayerController> ().IsDying()) {
-						gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("You died!");
+					//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
+					gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (2);
 				} 
+			  //else {
+						
+				//if (activePlayer.GetComponent<PlayerController> ().IsDying ()) {
+			//		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("You died!");
+			//	} else {
+				//	gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Lost Life");
+				//}
 					
-			}
+		//	}
 			gameMenu.GetComponent<GameMenu> ().UpdateView ();
 			state = 11;
 			break;
@@ -152,12 +156,14 @@ public class GameController : MonoBehaviour {
 		//Minigame
 		case 7:
 			Debug.Log ("State 7");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame");
+			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame");
+			gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (4);
 			if (isMinigamePlayed) {
 				isMinigamePlayed = false;
-				Debug.Log ("IsPlayed");
+				gameMenu.GetComponent<GameMenu> ().SetItemVisible (activePlayer.GetComponent<PlayerController> ().GetItem ());
+				gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+				gameMenu.GetComponent<GameMenu> ().UpdateView ();
 				state = 10;
-
 			}
 			//Else Wait for the end of the minigame
 			break;
@@ -165,13 +171,14 @@ public class GameController : MonoBehaviour {
 		//FieldAction Movement
 		case 8:
 			Debug.Log ("State 8");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Move");
+			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Move");
 			state = 11;
 			break;
 
 		case 9:
 			Debug.Log ("State 9");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Skip");
+			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Skip");
+		    gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (3);
 			activePlayer.GetComponent<PlayerController> ().SetSkipAt (round + 1);
 			state = 11;
 		
@@ -180,6 +187,8 @@ public class GameController : MonoBehaviour {
 		//next player or new round
 		case 10:
 			Debug.Log ("State 10");
+			gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+			gameMenu.GetComponent<GameMenu> ().UpdateView ();
 			if (playerIDDice < orderOfPlayer.Length - 1) {
 				playerIDDice++;
 			} else {

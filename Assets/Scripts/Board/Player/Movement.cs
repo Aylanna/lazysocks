@@ -28,16 +28,12 @@ public class Movement : MonoBehaviour {
 	}
 
 	public void CheckIsDead (){
-		//if (gameObject.GetComponent<PlayerController> ().IsDying() ) {
-		//	Debug.Log ("Waypoit dead!");
 			gameObject.GetComponent<PlayerController> ().SetDying (false);
 			currentWayPointID = 0;
 			transform.position = pathToFollow.pathObjs [currentWayPointID].position;
-		//}
 	}
 
 	void CheckForGoal() {
-		//Is Goal reached
 		if (currentWayPointID >= pathToFollow.pathObjs.Count) {
 			currentWayPointID = pathToFollow.pathObjs.Count - 1;
 			gameObject.GetComponent<PlayerController> ().SetGameWon (true);

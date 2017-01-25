@@ -9,6 +9,13 @@ public class TissueRacer : BoardField {
 		gc.state = 7;
 		Debug.Log ("Tissue Racer");
 		scl.SetSceneIndex (2);
+		StartCoroutine (StartMinigame ());
+	}
+
+	protected IEnumerator StartMinigame()
+	{
+		yield return new WaitForSeconds(2.0f);
 		scl.LoadMinigame ();
+
 	}
 }

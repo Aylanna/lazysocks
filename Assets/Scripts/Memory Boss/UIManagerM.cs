@@ -72,6 +72,7 @@ public class UIManagerM : MonoBehaviour
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (lifePoint);
 		scl.SetItem (item);
+		scl.SetPlayedBossBattle (true);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
 	}

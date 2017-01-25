@@ -8,6 +8,14 @@ public class WhackAMole : BoardField  {
 		gc.state = 7;
 		Debug.Log ("Tissue Racer");
 		scl.SetSceneIndex (1);
+		StartCoroutine (StartMinigame ());
+
+	}
+
+	protected IEnumerator StartMinigame()
+	{
+		yield return new WaitForSeconds(2.0f);
 		scl.LoadMinigame ();
+
 	}
 }

@@ -10,7 +10,7 @@ public class TestBassBattle1 : BoardField {
 		
 		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 0) {
 			if (gc.activePlayer.GetComponent<PlayerController> ().IsPlayerInBossBattleState ()) {
-				gc.activePlayer.GetComponent<PlayerController> ().SetItem (1);
+				gc.activePlayer.GetComponent<PlayerController> ().SetItem ();
 				gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle1 (false);
 				gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle2 (false);
 				gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle3 (false);

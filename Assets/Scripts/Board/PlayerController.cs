@@ -102,8 +102,8 @@ public class PlayerController : MonoBehaviour {
 		return skipAt;
 	}
 
-	public void SetItem(int item) {
-		this.items = item;
+	public void SetItem() {
+		items++;
 	}
 
 	public int GetItem() {
@@ -120,15 +120,12 @@ public class PlayerController : MonoBehaviour {
 
 	public bool IsPlayerInBossBattleState() {
 		if (bossBattle1) {
-			Debug.Log ("Boss1");
 			return true;
 		} else {
 			if (bossBattle2) {
-				Debug.Log ("Boss2");
 				return true;
 			} else {
 				if (bossBattle3) {
-					Debug.Log ("Boss3");
 					return true;
 				} else {
 					return false;
@@ -136,4 +133,5 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+		
 }

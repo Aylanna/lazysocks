@@ -9,6 +9,7 @@ public class Sceneloader : MonoBehaviour {
 	private int sceneIndex;
 	private bool item;
 	private bool loseLifePoint;
+	private bool playedBossBattle;
 
 
 
@@ -18,9 +19,9 @@ public class Sceneloader : MonoBehaviour {
 
 	public void UnLoadMinigame () {
 		SceneManager.UnloadScene(sceneIndex);
-		//SceneManager.UnloadSceneAsync (sceneIndex);
 		gc.mainScene.SetActive (true);
-		gc.isMinigamePlayed = true;
+		StartCoroutine (Waiting ());
+
 		if (extraLife) 
 			gc.activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
 		
@@ -28,24 +29,53 @@ public class Sceneloader : MonoBehaviour {
 			gc.activePlayer.GetComponent<PlayerController> ().ReduceLifePoints ();
 
 				
-		if (item)
-			gc.activePlayer.GetComponent<PlayerController> ().SetItem (1);
+		if (item && playedBossBattle) {
+			gc.activePlayer.GetComponent<PlayerController> ().SetItem ();
+			SetBossBattleStateFalse ();
+			playedBossBattle = false;
+		} else {
+			if (!item && playedBossBattle) {
+				playedBossBattle = false;
+				SetBossBattleStateTrue ();
+			}
+
+		}
 			
 	
+	}
+
+	protected IEnumerator Waiting()
+	{
+		yield return new WaitForSeconds(2.0f);
+		gc.isMinigamePlayed = true;
+
+	}
+
+	public void SetBossBattleStateFalse() {
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 1)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle1 (false);
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 2)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle2 (false);
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 3)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle3 (false);
+	}
+
+	public void SetBossBattleStateTrue() {
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 0)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle1 (true);
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 1)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle2 (true);
+		if (gc.activePlayer.GetComponent<PlayerController> ().GetItem () == 3)
+			gc.activePlayer.GetComponent<PlayerController> ().SetBossBattle3 (true);
 	}
 
 	public void LoadMinigame() {
 		gc.mainScene.SetActive (false);
 		StartCoroutine (load());
-		//SceneManager.LoadScene (sceneIndex, LoadSceneMode.Additive);
-
-		//SceneManager.LoadScene (sceneIndex);
-		//SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
 	}
 
 	protected IEnumerator load() {
 		AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex,LoadSceneMode.Additive);
-		//async.allowSceneActivation = ;
 		yield return async;
 	}
 
@@ -63,5 +93,9 @@ public class Sceneloader : MonoBehaviour {
 
 	public void SetSceneIndex(int sceneIndex) {
 		this.sceneIndex = sceneIndex;
+	}
+
+	public void SetPlayedBossBattle(bool playedBossBattle) {
+		this.playedBossBattle = playedBossBattle;
 	}
 }

@@ -20,6 +20,7 @@ public class UIManagerD : MonoBehaviour
 	private bool item;
 
 
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -74,6 +75,7 @@ public class UIManagerD : MonoBehaviour
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (loseLifePoint);
 		scl.SetItem (item);
+		scl.SetPlayedBossBattle (true);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
 	}

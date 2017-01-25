@@ -8,7 +8,14 @@ public class BrickBreaker : BoardField {
 	public override void DoFieldAction () {
 		gc.state = 7;
 		scl.SetSceneIndex (5);
+		StartCoroutine (StartMinigame ());
+	}
+
+	protected IEnumerator StartMinigame()
+	{
+		yield return new WaitForSeconds(2.0f);
 		scl.LoadMinigame ();
+
 	}
 
 }
