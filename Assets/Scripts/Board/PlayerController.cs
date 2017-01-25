@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void LifePointsManager() {
-		int life = Random.Range (1, -2);
+		int life = 1;
 		switch (life) {
 		case 1: 
 			AddLifePoints ();
