@@ -70,7 +70,7 @@ public class UIManagerM : MonoBehaviour
 	public void BackToBoard()
 	{
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetExtraLife (lifePoint);
+		scl.SetLoseLifePoint (lifePoint);
 		scl.SetItem (item);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);

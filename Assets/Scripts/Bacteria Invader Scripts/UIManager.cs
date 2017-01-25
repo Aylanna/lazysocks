@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
 		bossDead.text = "Goodjob, You defeated the boss and got an item!";
 		item = true;
 		gameOverPanel.SetActive (true); 
+		Pause ();
 	}
 
 	public void GameOver()
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
 		loseLifePoint = true; 
 		gameOver = true;
 		gameOverPanel.SetActive(true);
+		Pause ();
 	}
 
 	public void Play()
@@ -72,9 +74,10 @@ public class UIManager : MonoBehaviour
 	public void BackToBoard()
 	{		
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-		scl.SetLoseLifePoint (loseLifePoint);
+		scl.SetLoseLifePoint (loseLifePoint); 
 		scl.SetItem (item);
 		scl.UnLoadMinigame ();
+		Pause ();
 		Destroy (additiveScene);
 	}
 }

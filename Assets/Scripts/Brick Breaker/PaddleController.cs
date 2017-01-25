@@ -30,7 +30,7 @@ public class PaddleController : MonoBehaviour {
 	void Update () {
 
 		if (currentPlatformAndroid) {
-			AccelerometerMove ();
+			TouchMove ();
 		} else {
 			MoveInput ();
 		}
@@ -62,6 +62,32 @@ public class PaddleController : MonoBehaviour {
 		} else {
 			Stop (); 
 		}
+	}
+
+	void TouchMove()
+	{
+		if (Input.touchCount > 0) {
+
+			Touch touch = Input.GetTouch (0);
+
+			float middle = Screen.width / 2;
+
+			if (touch.position.x < middle && touch.phase == TouchPhase.Began) {
+				MoveLeft ();
+			} 
+			else if (touch.position.x > middle && touch.phase == TouchPhase.Began) {
+				MoveRight ();
+			}
+		}
+		else
+		{
+			SetVelocityZero();
+		}
+	}
+
+	public void SetVelocityZero()
+	{
+		rb.velocity = Vector2.zero;
 	}
 
 	void MoveInput() {
