@@ -20,15 +20,20 @@ public class GameMenu : MonoBehaviour {
 
 	void Start () {
 		gc = GameObject.Find("GameController").GetComponent<GameController> ();
+		DisableItems ();
+		gameMessage.enabled = false;
+	}
+
+	public void DisableItems() {
 		item1.enabled = false;
 		item2.enabled = false;
 		item3.enabled = false;
-		gameMessage.enabled = false;
+
 	}
 
 	public void UpdateView() {
 		lifePointText.text = gc.activePlayer.GetComponent<PlayerController> ().GetLifePoints().ToString();
-
+		SetItemVisible (gc.activePlayer.GetComponent<PlayerController> ().GetItem ());
 		img.sprite = gc.activePlayer.GetComponentInChildren<SpriteRenderer> ().sprite;
 	}
 
@@ -41,13 +46,24 @@ public class GameMenu : MonoBehaviour {
 
 		switch (index) {
 
+		case 0: 
+			item1.enabled = false;
+			item2.enabled = false;
+			item3.enabled = false;
+			break;
 		case 1:
 			item1.enabled = true;
+			item2.enabled = false;
+			item3.enabled = false;
 			break;
 		case 2:
+			item1.enabled = true;
 			item2.enabled = true;
+			item3.enabled = false;
 			break;
 		case 3:
+			item1.enabled = true;
+			item2.enabled = true;
 			item3.enabled = true;
 			break;
 		}

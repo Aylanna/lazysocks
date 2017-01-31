@@ -22,15 +22,17 @@ public class Movement : MonoBehaviour {
 			return;
 		CheckForGoal ();
 		CheckBossBattle ();
-		//CheckIsDead ();
 		Move ();
 		
 	}
 
-	public void CheckIsDead (){
-			gameObject.GetComponent<PlayerController> ().SetDying (false);
-			currentWayPointID = 0;
-			transform.position = pathToFollow.pathObjs [currentWayPointID].position;
+	public void ProcessDying (){
+		gameObject.GetComponent<PlayerController> ().SetDying (false);
+		currentWayPointID = 0;
+		transform.position = pathToFollow.pathObjs [currentWayPointID].position;
+		gameObject.GetComponent<PlayerController> ().SetBossBattle1 (false);
+		gameObject.GetComponent<PlayerController> ().SetBossBattle2 (false);
+		gameObject.GetComponent<PlayerController> ().SetBossBattle3 (false);
 	}
 
 	void CheckForGoal() {

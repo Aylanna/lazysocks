@@ -75,27 +75,21 @@ public class GameController : MonoBehaviour {
 		case 2:
 			Debug.Log ("State 2");
 			activePlayer = orderOfPlayer [playerIDDice];
-			if (activePlayer.GetComponent<PlayerController> ().IsDying ()) {
-				activePlayer.GetComponent<Movement> ().CheckIsDead ();
-			}
+			gameMenu.GetComponent<GameMenu> ().enabled = false;
+			if (IsActivePlayerDead()) {
+				
+			} 
 			if (!activePlayer.GetComponent<PlayerController> ().IsPlayerInBossBattleState ()) {
+				
 				rollADice.enabled = true;
-	
-				if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
-					state = 10;
-				} else {
-					dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
-					if (isDice) {
-						
-
-
-						StartCoroutine (SetDice ());
-						isDice = false;
-					}
-				}
+				ProcessSkipState ();
 			} else {
-				state = 4;
+				//Active Player needs  play bossbattle again
+
+				activePlayer.GetComponent<PlayerController> ().SetDiceValue (0);
+				state = 3;
 			}
+
 			break;
 
 		//Player moves
@@ -119,6 +113,7 @@ public class GameController : MonoBehaviour {
 			bc.HandleFieldAct ();
 
 
+
 			//Test Data
 
 			break;
@@ -126,6 +121,7 @@ public class GameController : MonoBehaviour {
 		//ExtraDice
 		case 5:
 			Debug.Log ("State 5");
+			//Debug.LogError ("ExtraDice " +  activePlayer.GetComponent<PlayerController> ().playerName);
 			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
 			gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (1);
 			deactivateDice = false;
@@ -161,7 +157,7 @@ public class GameController : MonoBehaviour {
 			if (isMinigamePlayed) {
 				isMinigamePlayed = false;
 				gameMenu.GetComponent<GameMenu> ().SetItemVisible (activePlayer.GetComponent<PlayerController> ().GetItem ());
-				gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+
 				gameMenu.GetComponent<GameMenu> ().UpdateView ();
 				state = 10;
 			}
@@ -189,6 +185,7 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("State 10");
 			gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 			gameMenu.GetComponent<GameMenu> ().UpdateView ();
+			rollADice.enabled = false;
 			if (playerIDDice < orderOfPlayer.Length - 1) {
 				playerIDDice++;
 			} else {
@@ -276,6 +273,30 @@ public class GameController : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(1.0f);
 		state = 2;
+
+	}
+
+	bool IsActivePlayerDead() {
+		if (activePlayer.GetComponent<PlayerController> ().IsDying ()) {
+			activePlayer.GetComponent<Movement> ().ProcessDying();
+			return true;
+		} else {
+			return false;
+
+		}
+	}
+
+
+	void ProcessSkipState() {
+		if (activePlayer.GetComponent<PlayerController> ().GetSkipAt () == round) {
+			state = 10;
+		} else {
+			dice.messageText.text = activePlayer.GetComponent<PlayerController> ().playerName;
+			if (isDice) {
+				StartCoroutine (SetDice ());
+				isDice = false;
+			}
+		}
 
 	}
 

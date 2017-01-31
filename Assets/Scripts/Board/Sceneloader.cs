@@ -20,13 +20,17 @@ public class Sceneloader : MonoBehaviour {
 	public void UnLoadMinigame () {
 		SceneManager.UnloadScene(sceneIndex);
 		gc.mainScene.SetActive (true);
+		gc.gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 		StartCoroutine (Waiting ());
+	
+		//gc.isMinigamePlayed = true;
 
-		if (extraLife) 
+		if (extraLife && !playedBossBattle) 
 			gc.activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
 		
-		if(loseLifePoint)
+		if (loseLifePoint && playedBossBattle) {
 			gc.activePlayer.GetComponent<PlayerController> ().ReduceLifePoints ();
+		}
 
 				
 		if (item && playedBossBattle) {

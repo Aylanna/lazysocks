@@ -13,6 +13,7 @@ public class ExtraDice : BoardField {
 
 	protected IEnumerator StartWaitingState() {
 		yield return new WaitForSeconds(2.0f);
+		gc.gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 		gc.state = 2;
 
 	}
