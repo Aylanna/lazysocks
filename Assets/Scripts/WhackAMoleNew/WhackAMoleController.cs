@@ -35,7 +35,7 @@ public class WhackAMoleController : MonoBehaviour {
 			spawner.StopSpawn ();
 			ic.gameOver = false;
 		}
-		if (ic.score == 3) {
+		if (ic.score == 10) {
 			gameOverCanvas.enabled = true;
 			extraLifeText.text = "You cleaned the hands, goodjob! You got an extra live.";
 			CancelInvoke ("CountDown");
