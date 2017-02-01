@@ -34,6 +34,12 @@ public class BallBehavior : MonoBehaviour {
 			rb.isKinematic = false;
 			tapSprite.SetActive (false);
 			rb.AddForce (new Vector2 (ballForce, ballForce));
+
+            if (rb.velocity.magnitude < ballForce)
+            {
+                rb.AddForce(new Vector2(ballForce, ballForce)); 
+            }
+
 			gameStarted = true;
 		}
 	}
