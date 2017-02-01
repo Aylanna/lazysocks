@@ -61,6 +61,7 @@ public class UIManagerT : MonoBehaviour
 	public void GameOver()
 	{
 		gameOver = true;
+        Pause(); 
 	    gameOverScoreText.text = "Your score: " + score;
 	    neededScoreText.text = "Goal: " + neededScore;
 
@@ -98,7 +99,7 @@ public class UIManagerT : MonoBehaviour
 	
 	public void BackToBoard()
 	{
-		
+        Pause(); 
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife (extralife);
 		scl.UnLoadMinigame ();
