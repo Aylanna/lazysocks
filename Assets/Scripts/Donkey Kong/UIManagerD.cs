@@ -38,6 +38,7 @@ public class UIManagerD : MonoBehaviour
 
 	public void GameOverBossDefeat()
 	{
+        Pause();
 		gameOver = true;
 		gameOverText.text = "Good Job You defeated the boss!" + '\n' + " You got the magic toilet brush!";
 		item = true;
@@ -46,6 +47,7 @@ public class UIManagerD : MonoBehaviour
 
 	public void GameOverNoBossDefeat()
 	{
+        Pause();
 		gameOver = true;
 		gameOverText.text = "You didnt defeat the boss";
 		loseLifePoint = true;
@@ -72,6 +74,7 @@ public class UIManagerD : MonoBehaviour
 
 	public void BackToBoard()
 	{
+        Pause();
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (loseLifePoint);
 		scl.SetItem (item);
