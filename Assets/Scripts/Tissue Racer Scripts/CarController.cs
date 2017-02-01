@@ -67,6 +67,14 @@ public class CarController : MonoBehaviour
 
 			ui.ScoreUpdate ();
 		}
+
+        if (col.gameObject.tag == "BadEnemyCar") {
+            //set game over once the bad bacteria is hit by player
+            GameObject badEnemyCar = GameObject.FindGameObjectWithTag("BadEnemyCar");
+            Destroy(badEnemyCar);
+
+            ui.GameOver(); 
+        }
 	}
 
 	void AccelerometerMove()
