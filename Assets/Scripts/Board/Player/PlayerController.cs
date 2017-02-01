@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour {
 	private bool wonGame;
 	private bool isExtraLife;
 	private bool isDying;
+	private bool healedLeafSection1;
+	private bool healedLeafSection2;
+	private bool healedLeafSection3;
 
 
     public void SetDiceValue(int diceValue)
@@ -28,6 +31,39 @@ public class PlayerController : MonoBehaviour {
     {
         return diceValue;
     }
+
+	public void SetHealedLeafSection1() {
+		if (items == 1)
+			this.healedLeafSection1 = true;
+		else
+			this.healedLeafSection1 = false;
+	}
+
+	public bool IsHealedLeafSection1() {
+		return healedLeafSection1;
+	}
+
+	public void SetHealedLeafSection2() {
+		if (items == 2)
+			this.healedLeafSection2 = true;
+		else
+			this.healedLeafSection2 = false;
+	}
+
+	public bool IsHealedLeafSection2() {
+		return healedLeafSection2;
+	}
+		
+	public void SetHealedLeafSection3() {
+		if (items == 3)
+			this.healedLeafSection3 = true;
+		else
+			this.healedLeafSection3 = false;
+	}
+
+	public bool IsHealedLeafSection3() {
+		return healedLeafSection3;
+	}
 
 	public void SetBossBattle1(bool won) {
 		bossBattle1 = won;

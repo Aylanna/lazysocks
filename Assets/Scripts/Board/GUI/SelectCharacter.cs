@@ -8,7 +8,7 @@ public class SelectCharacter : MonoBehaviour {
 	public Color disableColor = Color.gray;
     public Text messageText;
     public Canvas rollADice;
-    private bool isDice = false;
+  //  private bool isDice = false;
     private int counter = 1;
     private PlayerController player;
     private GameController controller;

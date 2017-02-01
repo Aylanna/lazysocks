@@ -20,21 +20,22 @@ public class Sceneloader : MonoBehaviour {
 	public void UnLoadMinigame () {
 		SceneManager.UnloadScene(sceneIndex);
 		gc.mainScene.SetActive (true);
-		gc.gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 		StartCoroutine (Waiting ());
-	
-		//gc.isMinigamePlayed = true;
+		ManageMinigameOptions ();
 
+	}
+
+	void ManageMinigameOptions() {
 		if (extraLife && !playedBossBattle) 
 			gc.activePlayer.GetComponent<PlayerController> ().AddLifePoints ();
-		
 		if (loseLifePoint && playedBossBattle) {
 			gc.activePlayer.GetComponent<PlayerController> ().ReduceLifePoints ();
 		}
-
-				
 		if (item && playedBossBattle) {
 			gc.activePlayer.GetComponent<PlayerController> ().SetItem ();
+			gc.activePlayer.GetComponent<PlayerController> ().SetHealedLeafSection1 ();
+			gc.activePlayer.GetComponent<PlayerController> ().SetHealedLeafSection2 ();
+			gc.activePlayer.GetComponent<PlayerController> ().SetHealedLeafSection3();
 			SetBossBattleStateFalse ();
 			playedBossBattle = false;
 		} else {
@@ -42,10 +43,7 @@ public class Sceneloader : MonoBehaviour {
 				playedBossBattle = false;
 				SetBossBattleStateTrue ();
 			}
-
 		}
-			
-	
 	}
 
 	protected IEnumerator Waiting()

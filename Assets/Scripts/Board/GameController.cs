@@ -28,29 +28,23 @@ public class GameController : MonoBehaviour {
 	private int round = 1;
 	public GameObject startField;
 
-	private bool test;
 
 
-    void Start()
-    {
-		
+
+    void Start() {
 		dice = GetComponent<Dice> ();
 		bc = GetComponent<BoardController> ();
 		gameMenu.enabled = false;
 		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (" ");
-		startMenu.enabled = true;
-       
+		startMenu.enabled = true;    
     }
  
-    void Update()
-    {
-        switch(state)
-        {
-            // Game preparation
-		case 0:
-			orderOfPlayer = new GameObject[numbersOfPlayers];
-		//	startMenu.enabled = true;
-				//waiting to start the game
+    void Update() {
+        switch(state) {
+        	// Game preparation
+			case 0:
+				orderOfPlayer = new GameObject[numbersOfPlayers];
+		   		 //waiting to start the game
                 break;
 
 			//Player role for highscore
@@ -71,9 +65,8 @@ public class GameController : MonoBehaviour {
 			}
 			break;
 
-		//Player dice
-		case 2:
-			Debug.Log ("State 2");
+			//Player dice
+			case 2:
 			activePlayer = orderOfPlayer [playerIDDice];
 			gameMenu.GetComponent<GameMenu> ().enabled = false;
 			if (IsActivePlayerDead()) {
@@ -84,136 +77,98 @@ public class GameController : MonoBehaviour {
 				rollADice.enabled = true;
 				ProcessSkipState ();
 			} else {
-				//Active Player needs  play bossbattle again
-
 				activePlayer.GetComponent<PlayerController> ().SetDiceValue (0);
 				state = 3;
 			}
 
 			break;
 
-		//Player moves
-		case 3:
-			Debug.Log ("State 3");
+			//Player moves
+			case 3:
 
-			if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
-				bc.HandleBoardEvent ();
-				if (activePlayer.GetComponent<PlayerController> ().IsGameWon ()){
-					state = 12;
-			} else {
+				if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
+					bc.HandleBoardEvent ();
+					if (activePlayer.GetComponent<PlayerController> ().IsGameWon ()){
+						state = 12;
+				} else {
 						state = 4; 
 					}
-			}
+				}
+				break;
 
-			break;
+			//FieldAct
+			case 4:
+				bc.HandleFieldAct ();
+				break;
 
-		//FieldAct
-		case 4:
-			Debug.Log ("State 4");
-			bc.HandleFieldAct ();
+			//ExtraDice
+			case 5:
+				gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (1);
+				deactivateDice = false;
+				state = 11;
+				break;
 
-
-
-			//Test Data
-
-			break;
-
-		//ExtraDice
-		case 5:
-			Debug.Log ("State 5");
-			//Debug.LogError ("ExtraDice " +  activePlayer.GetComponent<PlayerController> ().playerName);
-			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Dice");
-			gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (1);
-			deactivateDice = false;
-			state = 11;
-			break;
-
-		//ExtraLife
-		case 6:
-			Debug.Log ("State 6");
-
+			//ExtraLife
+			case 6:
 				if (activePlayer.GetComponent<PlayerController> ().IsExtraLife ()) {
-					//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Life");
 					gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (2);
 				} 
-			  //else {
-						
-				//if (activePlayer.GetComponent<PlayerController> ().IsDying ()) {
-			//		gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("You died!");
-			//	} else {
-				//	gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Lost Life");
-				//}
-					
-		//	}
-			gameMenu.GetComponent<GameMenu> ().UpdateView ();
-			state = 11;
-			break;
-
-		//Minigame
-		case 7:
-			Debug.Log ("State 7");
-			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Minigame");
-			gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (4);
-			if (isMinigamePlayed) {
-				isMinigamePlayed = false;
-				gameMenu.GetComponent<GameMenu> ().SetItemVisible (activePlayer.GetComponent<PlayerController> ().GetItem ());
-
 				gameMenu.GetComponent<GameMenu> ().UpdateView ();
-				state = 10;
-			}
-			//Else Wait for the end of the minigame
-			break;
+				state = 11;
+				break;
 
-		//FieldAction Movement
-		case 8:
-			Debug.Log ("State 8");
-			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Extra Move");
-			state = 11;
-			break;
+			//Minigame/Bossbattle
+			case 7:
+				gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (4);
+				if (isMinigamePlayed) {
+					isMinigamePlayed = false;
+					gameMenu.GetComponent<GameMenu> ().SetItemVisible (activePlayer.GetComponent<PlayerController> ().GetItem ());
+					gameMenu.GetComponent<GameMenu> ().UpdateView ();
+				    gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+					state = 10;
+				}
+				//Else Wait for the end of the minigame
+				break;
 
-		case 9:
-			Debug.Log ("State 9");
-			//gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage ("Skip");
-		    gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (3);
-			activePlayer.GetComponent<PlayerController> ().SetSkipAt (round + 1);
-			state = 11;
-		
-			break;
+			//FieldAction Movement
+			case 8:
+				state = 11;
+				break;
 
-		//next player or new round
-		case 10:
-			Debug.Log ("State 10");
-			gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
-			gameMenu.GetComponent<GameMenu> ().UpdateView ();
-			rollADice.enabled = false;
-			if (playerIDDice < orderOfPlayer.Length - 1) {
-				playerIDDice++;
-			} else {
-				playerIDDice = 0;
-				round++;
-				RemoveSkip ();
-				dice.SetMessage ("Round: " + round.ToString ());
-			}
-			deactivateDice = false;
-			dice.SetStartDice ();
-			state = 2;
-        	break;
+			case 9:
+		    	gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (3);
+				activePlayer.GetComponent<PlayerController> ().SetSkipAt (round + 1);
+				state = 11;
+				break;
 
-		//waiting state1
-		case 11: 
-			Debug.Log ("State 11");
-			break;
+			//next player or new round
+			case 10:
+				gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+				gameMenu.GetComponent<GameMenu> ().UpdateView ();
+				rollADice.enabled = false;
+				if (playerIDDice < orderOfPlayer.Length - 1) {
+					playerIDDice++;
+				} else {
+					playerIDDice = 0;
+					round++;
+					RemoveSkip ();
+					dice.SetMessage ("Round: " + round.ToString ());
+				}
+				deactivateDice = false;
+				dice.SetStartDice ();
+				state = 2;
+        		break;
 
-		case 12: 
-			Debug.Log ("State 12");
-			gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (activePlayer.GetComponent<PlayerController> ().playerName + " Won!");
-			StartCoroutine (FinishGame ());
+			//waiting state1
+			case 11: 
+				break;
 
-			break;
+			case 12: 
+				gameMenu.GetComponent<GameMenu> ().SetFieldEventMessage (activePlayer.GetComponent<PlayerController> ().playerName + " Won!");
+				StartCoroutine (FinishGame ());
+				break;
 		}
-
-
-
+			
     }
 	protected IEnumerator FinishGame() {
 		yield return new WaitForSeconds (2.0f);
@@ -245,10 +200,8 @@ public class GameController : MonoBehaviour {
 				&& playerIDDice != i) {
 				return true;
 			}
-
 		}
 		return false;
-
 	}
  
 
@@ -265,15 +218,12 @@ public class GameController : MonoBehaviour {
 				orderOfPlayer [i].GetComponent<PlayerController> ().SetSkipAt (-1);
 			}
 		}
-
 	}
 
 
-	protected IEnumerator HighScoreState()
-	{
+	protected IEnumerator HighScoreState() {
 		yield return new WaitForSeconds(1.0f);
 		state = 2;
-
 	}
 
 	bool IsActivePlayerDead() {
@@ -282,7 +232,6 @@ public class GameController : MonoBehaviour {
 			return true;
 		} else {
 			return false;
-
 		}
 	}
 
@@ -297,9 +246,5 @@ public class GameController : MonoBehaviour {
 				isDice = false;
 			}
 		}
-
 	}
-
-
-
 }

@@ -17,6 +17,11 @@ public class GameMenu : MonoBehaviour {
 	public Sprite extralife;
 	public Sprite skip;
 	public Sprite minigame;
+	public GameObject boardBackground;
+	public Sprite sickFLower;
+	public Sprite healedLeafSection1;
+	public Sprite healedLeafSection2;
+	public Sprite healedLeafSection3;
 
 	void Start () {
 		gc = GameObject.Find("GameController").GetComponent<GameController> ();
@@ -35,8 +40,17 @@ public class GameMenu : MonoBehaviour {
 		lifePointText.text = gc.activePlayer.GetComponent<PlayerController> ().GetLifePoints().ToString();
 		SetItemVisible (gc.activePlayer.GetComponent<PlayerController> ().GetItem ());
 		img.sprite = gc.activePlayer.GetComponentInChildren<SpriteRenderer> ().sprite;
+		CheckBoardBackground ();
 	}
 
+	public void CheckBoardBackground() {
+		if(gc.activePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1())
+			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection1;
+		if(gc.activePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2())
+			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection2;
+		if(gc.activePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3())
+			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection3;
+	}
 	public void SetFieldEventMessage(string message) {
 
 	//	gameMessage.text = message;
