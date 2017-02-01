@@ -27,7 +27,7 @@ public class CarSpawner : MonoBehaviour
 
 		if (timer <= 0) {
 			Vector3 carPos = new Vector3(Random.Range(-1.2f,1.2f),transform.position.y,transform.position.z);
-			carNo = Random.Range (0,5);
+			carNo = Random.Range (0,7);
 			GameObject obj = (GameObject) Instantiate (cars[carNo], carPos, transform.rotation);
 			obj.transform.parent = parentObject.transform;
 			timer = delayTimer;

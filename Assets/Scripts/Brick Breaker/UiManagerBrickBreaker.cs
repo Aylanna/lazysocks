@@ -54,6 +54,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	public void GameOver()
 	{
 		gameOver = true;
+        Pause();
 		gameOverScoreText.text = "Your score: " + score;
 
 		if (score >= neededScore)
@@ -89,6 +90,7 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 
 	public void BackToBoard()
 	{
+        Pause();
 		//scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		//gameObject.SendMessage ("WashMe", 0, SendMessageOptions.DontRequireReceiver);
 		scene.DestroyScene ();

@@ -35,6 +35,7 @@ public class UIManagerM : MonoBehaviour
 
 	public void GameOverBossDefeat()
 	{
+        Pause();
 		gameOver = true;
 		gameOverText.text = "You mached every card and defeated the Boss!";
 		item = true;
@@ -43,6 +44,7 @@ public class UIManagerM : MonoBehaviour
 
 	public void GameOverNoBossDefeat()
 	{
+        Pause();
 		gameOver = true;
 		gameOverText.text = "You didnt defeat the boss and have no lives anymore :(";
 		lifePoint = true;
@@ -69,6 +71,7 @@ public class UIManagerM : MonoBehaviour
 
 	public void BackToBoard()
 	{
+        Pause();
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (lifePoint);
 		scl.SetItem (item);
