@@ -69,13 +69,13 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 		{
 			extraLifeText.text = "You got an extra life";
 			extraLife = true;
-		}
+            storyEndPanel.SetActive(true);
+        }
 		else
 		{
 			extraLifeText.text = "You didn't get an extra life";
+            gameOverPanel.SetActive(true);
 		}
-
-        storyEndPanel.SetActive(true); 
 	}
 
 	public void Play()
