@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 	public Button[] buttons;
-	public GameObject mainMenuPanel;
-	public GameObject gameOverPanel;
+    public GameObject storyStartPanel;
+    public GameObject mainMenuPanel;
+    public GameObject storyEndPanel;
+    public GameObject gameOverPanel;
 
-	public Text bossDead; 
+    public Text bossDead; 
 
 	private int score;  
 	private bool gameOver;
@@ -23,16 +25,21 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//set mainmenu panel as active from the start and set the time scale on 0
-		mainMenuPanel = GameObject.Find("MainMenuPanel");
-		Time.timeScale = 0;
-		mainMenuPanel.SetActive(true);
+        //set story panel as active from the start and set time scal to 0
+        storyStartPanel = GameObject.Find("StoryStartPanel");
+        Time.timeScale = 0;
+        storyStartPanel.SetActive(true);
+        //set mainmenu panel as disabled from the start
+        mainMenuPanel = GameObject.Find("MainMenuPanel");
+        mainMenuPanel.SetActive(false);
+        //set the story end panel as disabled from the start
+        storyEndPanel = GameObject.Find("StoryEndPanel");
+        storyEndPanel.SetActive(false);
+        //set the game over panel as disabled from the start
+        gameOverPanel = GameObject.Find("GameOverPanel");
+        gameOverPanel.SetActive(false);
 
-		//set the game over panel as disabled from the start
-		gameOverPanel = GameObject.Find("GameOverPanel");
-		gameOverPanel.SetActive(false);
-
-		gameOver = false;
+        gameOver = false;
 	}
 
 	public void GameOverBossDefeated() 
@@ -40,7 +47,8 @@ public class UIManager : MonoBehaviour
 		gameOver = true; 
 		bossDead.text = "Goodjob, You defeated the boss and got an item!";
 		item = true;
-		gameOverPanel.SetActive (true); 
+        //gameOverPanel.SetActive (true); 
+        storyEndPanel.SetActive(true); 
 		Pause ();
 	}
 
@@ -53,7 +61,19 @@ public class UIManager : MonoBehaviour
 		Pause ();
 	}
 
-	public void Play()
+    public void StoryStart()
+    {
+        storyStartPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+    }
+
+    public void StoryEnd()
+    {
+        storyEndPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
+
+    public void Play()
 	{
 		mainMenuPanel.SetActive(false);
 		Pause();
