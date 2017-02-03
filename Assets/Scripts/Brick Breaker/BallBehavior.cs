@@ -14,8 +14,8 @@ public class BallBehavior : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		StartGameKey (); 
-	}
+		StartGameKey ();
+    }
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
@@ -33,12 +33,7 @@ public class BallBehavior : MonoBehaviour {
 			transform.SetParent(null);
 			rb.isKinematic = false;
 			tapSprite.SetActive (false);
-			rb.AddForce (new Vector2 (ballForce, ballForce));
-
-            if (rb.velocity.magnitude < ballForce)
-            {
-                rb.AddForce(new Vector2(ballForce, ballForce)); 
-            }
+			rb.AddRelativeForce (new Vector2 (ballForce, ballForce));
 
 			gameStarted = true;
 		}
