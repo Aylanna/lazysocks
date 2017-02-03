@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * This class mamange the movement on board and fieldaction.
+ * 
+ * @author Annkatrin Harms
+ */
 public class BoardController : MonoBehaviour {
 
-	private GameController gc;
 	private Movement move;
 
-	// Use this for initialization
-	void Start () {
-		gc = GameObject.Find("GameController").GetComponent<GameController> ();
-	}
-	
 	public void HandleBoardEvent() {
-	    move = gc.activePlayer.GetComponent<Movement> ();
-		move.currentWayPointID += gc.activePlayer.GetComponent<PlayerController> ().GetDiceValue ();
+		move = GameController.Instance.ActivePlayer.GetComponent<Movement> ();
+		move.currentWayPointID += GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().DiceValue;
 		move.SetMove (true);
 	}
 

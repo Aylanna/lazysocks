@@ -2,51 +2,32 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/**
+ * This class mamange to roll the dice on board.
+ * 
+ * @author Annkatrin Harms
+ */
 public class Dice : MonoBehaviour {
 
     public Sprite[] sprites = new Sprite[6];
     public Canvas rollADice;
     private Button dice;
-    private GameController controller;
     public Text messageText;
 	public Button nextPlayer;
 	public Text titleMessage;
 
 
-    void Start()
-    {
+    void Start() {
         dice = rollADice.GetComponent<Canvas>().GetComponentInChildren<Button>();
-        
-        if(controller == null)
-        {
-            controller = GetComponent<GameController>();
-        }
     }
-
-	public void SetButtonActive() {
-		nextPlayer.enabled = true;
-	}
-
-	public void SetButtonInActive() {
-		nextPlayer.enabled = false;
-	}
-
-	public void SetDiceActive() {
-		dice.enabled = true;
-	}
-
-	public void SetDiceInActive() {
-		dice.enabled = false;
-	}
-
-	public void SetMessage(string message) {
-		titleMessage.text = message;
-	}
    
-    public void RollDice()
-    {
-		if (!controller.deactivateDice) {
-			controller.deactivateDice = true;
+	/**
+	 * Each dice value has its own sprite.
+	 * The value is chosen by random.
+	 */
+    public void RollDice() {
+		if (!GameController.Instance.DeactivateDice) {
+			GameController.Instance.DeactivateDice = true;
 		int index = Random.Range (1, 7);
 			dice.interactable = true;
 			switch (index) {
@@ -71,32 +52,54 @@ public class Dice : MonoBehaviour {
 			}
 			if (nextPlayer.gameObject.activeSelf)
 				SetDiceInActive ();
-			controller.isDice = true;
-			if (controller.activePlayer != null)
-				controller.activePlayer.GetComponent<PlayerController> ().SetDiceValue (index);
+			GameController.Instance.IsDice = true;
+			if (GameController.Instance.ActivePlayer != null)
+				GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().DiceValue = index;
 		}
-
     }
 
+	/**
+	 * Next player button for dice highscore
+	 */
 	public void SetNextPlayer() {
-		if (!controller.isEqualHighScore ()) {
-			controller.playerIDDice++;
+		if (!GameController.Instance.isEqualHighScore ()) {
+			GameController.Instance.PlayerIDDice+=1;
 		}
 		SetStartDice ();
 		SetDiceActive ();
-		if (controller.playerIDDice == controller.numbersOfPlayers) {
+		if (GameController.Instance.PlayerIDDice == GameController.Instance.NumbersOfPlayers) {
 			SetDiceInActive ();
-
 		}
-
 	}
 
+	/**
+	 * Disable Next Player button 
+	 */
 	public void InActivateNextPlayer() {
 		nextPlayer.gameObject.SetActive (false);
-
 	}
 
+	//Setter
 	public void SetStartDice() {
 		dice.image.sprite = sprites [0];
+	}
+	public void SetButtonActive() {
+		nextPlayer.enabled = true;
+	}
+
+	public void SetButtonInActive() {
+		nextPlayer.enabled = false;
+	}
+
+	public void SetDiceActive() {
+		dice.enabled = true;
+	}
+
+	public void SetDiceInActive() {
+		dice.enabled = false;
+	}
+
+	public void SetMessage(string message) {
+		titleMessage.text = message;
 	}
 }

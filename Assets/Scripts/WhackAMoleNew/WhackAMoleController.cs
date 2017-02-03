@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
+/**
+ * This class manage the whole game Whack a Mole. Like start the game, gui for the game and to go back to the board game.
+ * 
+ * @author Annkatrin Harms
+ */
 public class WhackAMoleController : MonoBehaviour {
 
 	private int timerSeconds = 30;
@@ -18,16 +23,13 @@ public class WhackAMoleController : MonoBehaviour {
 
 
 	void Start () {
-		
 		spawner = GetComponent<SpawnCharacters> ();
 		ic = GetComponent<InputController> ();
 		gameOverCanvas.enabled = false;
 	}
 
 	void Update() {
-
 		scoreText.text = "Score = " + ic.score; 
-
 		if (ic.gameOver) {
 			gameOverCanvas.enabled = true;
 			extraLifeText.text = "You were catched by the tentacle! No extra live for you..."; 
@@ -43,11 +45,9 @@ public class WhackAMoleController : MonoBehaviour {
 			extraLife = true;
 			ic.gameOver = false;
 		}
-
 	}
 
 	void CountDown() {
-		
 		timerSeconds--;
 		if (timerSeconds < 1) {
 			CancelInvoke ("CountDown");
@@ -56,14 +56,12 @@ public class WhackAMoleController : MonoBehaviour {
 	}
 
 	public void StartGame() {
-		
 		InvokeRepeating ("Countdown", 1, 1);
 		spawner.StartSpawnInterval ();
 		startCanvas.enabled = false;
 	}
 
 	public void BackToBoard() {
-		
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife (extraLife);
 		scl.UnLoadMinigame ();

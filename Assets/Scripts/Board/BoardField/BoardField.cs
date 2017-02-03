@@ -2,8 +2,12 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/**
+ * This class is superclass of all fields
+ * 
+ * @author Annkatrin Harms
+ */
 public class BoardField : FieldAct {
-	protected GameController gc;
 	protected Sceneloader scl;
 	protected static int bacterialInvadersID = 3;
 	protected static int brickBreakerID = 5;
@@ -14,9 +18,7 @@ public class BoardField : FieldAct {
 
 
 	void Start() {
-		gc = GameObject.Find("GameController").GetComponent<GameController> ();
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
-
 	}
 
 	public override void DoFieldAction () {

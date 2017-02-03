@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class mamange the Startmenu of the game.
+ * 
+ * @author Annkatrin Harms
+ */
 public class StartMenu : MonoBehaviour {
 
 	public Canvas start;
@@ -12,6 +17,7 @@ public class StartMenu : MonoBehaviour {
 
 		numbersOfPlayer.enabled = false;
 	}
+
 	public void StartGame() {
 		start.enabled = false;
 		numbersOfPlayer.enabled = true;

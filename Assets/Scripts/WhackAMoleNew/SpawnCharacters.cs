@@ -1,33 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * This class manage the spawning of the tentacle and dirty hand and destroys them after a time.
+ * 
+ * @author Annkatrin Harms
+ */
 public class SpawnCharacters : MonoBehaviour {
 
 	public GameObject good;
 	public GameObject bad;
-
 	public Vector3[] spawnPoints;
 	public bool[] taken;
 	public float currentSpawnDelay = 0.1f;
 	public GameObject parentObject;
 
-
-	// Use this for initialization
 	private void Start () {
 		InitializeSpawnPositions();
 		InvokeRepeating ("ResetTakenPoint", 1, 5f);
-
-
 	}
-
-
 		
-
 	/**
      * Init the spawn options on in the scene were the characters will spawn
      */
-	private void InitializeSpawnPositions()
-	{
+	private void InitializeSpawnPositions() {
 		spawnPoints = new Vector3[12];
 		taken = new bool[12];
 
@@ -48,14 +44,11 @@ public class SpawnCharacters : MonoBehaviour {
 	/**
      * Spawn the characters at the certain spawnpoints
      */
-	private void SpawnCharacter()
-	{
+	private void SpawnCharacter() {
 		int spawnPoint;
 		int spawnType;
 		spawnPoint = Random.Range(0, 12);
-	    spawnType = Random.Range(0, 9);
-
-	    
+	    spawnType = Random.Range(0, 9); 
 		if (!taken [spawnPoint]) {	
 			if (spawnType == 0) {
 				GameObject obj = (GameObject)Instantiate (bad, spawnPoints [spawnPoint], Quaternion.identity);
@@ -117,9 +110,7 @@ public class SpawnCharacters : MonoBehaviour {
 				taken [spawnPoint] = true;
 				Destroy (obj, 1.0f);
 			}
-				
 		}
-
 	}
 
 	public void StartSpawnInterval() {
@@ -135,6 +126,5 @@ public class SpawnCharacters : MonoBehaviour {
 			if (taken [i] == true)
 				taken [i] = false;
 		}
-
 	}
 }

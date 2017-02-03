@@ -2,7 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
+/**
+ * This class draws the way path a player need to follow on the board.
+ * 
+ * @author Annkatrin Harms
+ */
 public class EditorPath : MonoBehaviour {
 
 	public Color rayColor = Color.white;

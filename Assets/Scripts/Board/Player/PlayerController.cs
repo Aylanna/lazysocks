@@ -2,35 +2,69 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/**
+ * This class is a model class for a player
+ * 
+ * @author Annkatrin Harms
+ */
 public class PlayerController : MonoBehaviour {
 
-    private int diceValue;
+	private int diceValue;
 	private int skipAt = -1;
-    public string playerName;
-	public int startLifePoints = 1;
-	public GameObject startfield;
+	private int startLifePoints = 1;
 	private int lifePoints = 1;
+
 	private int items;
-	private bool bossBattle1;
-	private bool bossBattle2;
-	private bool bossBattle3;
-	private bool wonGame;
-	private bool isExtraLife;
-	private bool isDying;
+	public string playerName;
+	public GameObject startfield;
 	private bool healedLeafSection1;
 	private bool healedLeafSection2;
 	private bool healedLeafSection3;
+	private bool bossBattle1;
+	private bool bossBattle2;
+	private bool bossBattle3;
+	private bool isGameWon;
+	private bool isExtraLife;
+	private bool isDying;
 
+	public int  DiceValue {
+		get{ return  diceValue; }
+		set{  diceValue = value; }
+	}
 
-    public void SetDiceValue(int diceValue)
-    {
-        this.diceValue = diceValue;
-    }
+	public int  Items {
+		get{ return  items; }
+		set{  items = value; }
+	}
 
-    public int GetDiceValue()
-    {
-        return diceValue;
-    }
+	public bool  IsGameWon {
+		get{ return  isGameWon; }
+		set{  isGameWon = value; }
+	}
+
+	public bool IsDying {
+		get{ return isDying; }
+		set{ isDying = value; }
+	}
+
+	public bool IsExtraLife {
+		get{ return isExtraLife; }
+		set{ isExtraLife = value; }
+	}
+	public bool BossBattle1 {
+		get{ return bossBattle1; }
+		set{ bossBattle1 = value; }
+	}
+
+	public bool BossBattle2 {
+		get{ return bossBattle2; }
+		set{ bossBattle2 = value; }
+	}
+
+	public bool BossBattle3 {
+		get{ return bossBattle3; }
+		set{ bossBattle3 = value; }
+	}
 
 	public void SetHealedLeafSection1() {
 		if (items == 1)
@@ -53,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 	public bool IsHealedLeafSection2() {
 		return healedLeafSection2;
 	}
-		
+
 	public void SetHealedLeafSection3() {
 		if (items == 3)
 			this.healedLeafSection3 = true;
@@ -65,43 +99,20 @@ public class PlayerController : MonoBehaviour {
 		return healedLeafSection3;
 	}
 
-	public void SetBossBattle1(bool won) {
-		bossBattle1 = won;
+	public int SkipAt {
+		get{ return skipAt; }
+		set{ skipAt = value; }
 	}
 
-	public void SetBossBattle2(bool won) {
-		bossBattle2 = won;
+	public int StartLifePoints{
+		get{ return startLifePoints; }
+		set{ startLifePoints = value; }
 	}
-
-	public void SetBossBattle3(bool won) {
-		bossBattle3 = won;
+	public int LifePoints {
+		get{ return lifePoints; }
+		set{ lifePoints = value; }
 	}
-
-	public bool IsBossBattle1() {
-		return bossBattle1;
-	}
-
-	public bool IsBossBattle2() {
-		return bossBattle2;
-	}
-
-	public bool IsBossBattle3() {
-		return bossBattle3;
-	}
-
-	public void LifePointsManager() {
-		int life = 1;
-		switch (life) {
-		case 1: 
-			AddLifePoints ();
-			isExtraLife = true;
-			break;
-		case -1:
-			ReduceLifePoints ();
-			break;
-
-		}
-	}
+		
 	public void AddLifePoints() {
 		this.lifePoints++;
 	}
@@ -112,46 +123,6 @@ public class PlayerController : MonoBehaviour {
 			isDying = true;
 			lifePoints = 1;
 		}
-	}
-
-	public bool IsExtraLife() {
-		return isExtraLife;
-	}
-
-	public bool IsDying() {
-		return isDying;
-	}
-
-	public void SetDying(bool isDying) {
-		this.isDying = isDying;
-	}
-
-	public int GetLifePoints() {
-		return lifePoints;
-	}
-
-	public void SetSkipAt(int skipAt) {
-		this.skipAt = skipAt;
-	}
-
-	public int GetSkipAt() {
-		return skipAt;
-	}
-
-	public void SetItem() {
-		items++;
-	}
-
-	public int GetItem() {
-		return items;
-	}
-
-	public void SetGameWon(bool won) {
-		wonGame = won;
-	}
-
-	public bool IsGameWon() {
-		return wonGame;
 	}
 
 	public bool IsPlayerInBossBattleState() {

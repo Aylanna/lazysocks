@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * This class mamange the extra life fieldaction.
+ * 
+ * @author Annkatrin Harms
+ */
 public class ExtraLife : BoardField {
 
-
-
 	public override void DoFieldAction () {
-		gc.activePlayer.GetComponent<PlayerController> ().LifePointsManager ();
-		gc.state = 6;
+		GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().AddLifePoints();
+		GameController.Instance.State = 6;
 		StartCoroutine (StartWaitingState());
-
 	}
 
 	protected IEnumerator StartWaitingState() {
 		yield return new WaitForSeconds(2.0f);
-		gc.state = 10;
-
+		GameController.Instance.State = 10;
 	}
 }

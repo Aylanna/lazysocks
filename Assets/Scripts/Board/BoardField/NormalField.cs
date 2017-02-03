@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class mamange the normal fieldaction.
+ * 
+ * @author Annkatrin Harms
+ */
 public class NormalField : BoardField {
 	
 	public override void DoFieldAction () {
-		if (gc.activePlayer.GetComponent<PlayerController> ().IsGameWon ())
-			gc.state = 12;
-		else
-			gc.state = 10;
-
+		GameController.Instance.State = 10;
 	}
-
 }
