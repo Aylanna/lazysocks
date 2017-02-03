@@ -11,6 +11,14 @@ public class FieldActMovement : BoardField {
 	public override void DoFieldAction () {
 		int steps = Random.Range(-3, 4);
 		GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().DiceValue = steps;
+		if (steps < 0) {
+			GameController.Instance.gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (6);
+		} else {
+			if (steps > 0) {
+				GameController.Instance.gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (5);
+			}
+		}
+				
 		GameController.Instance.State = 8;
 		StartCoroutine (StartWaitingState());
 	}

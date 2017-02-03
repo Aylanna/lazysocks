@@ -10,6 +10,7 @@ public class ExtraLife : BoardField {
 
 	public override void DoFieldAction () {
 		GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().AddLifePoints();
+		GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsExtraLife = true;
 		GameController.Instance.State = 6;
 		StartCoroutine (StartWaitingState());
 	}

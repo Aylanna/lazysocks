@@ -99,9 +99,9 @@ public class GameController : MonoBehaviour {
 	void Awake() {
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad (gameObject);
+			//DontDestroyOnLoad (gameObject);
 		} else {
-			Destroy (gameObject);
+			//Destroy (gameObject);
 		}
 	}
     
@@ -126,19 +126,16 @@ public class GameController : MonoBehaviour {
 				break;
 
 			//Player roll the dice
-			case 2:
+		case 2:
 				PlayerDiceState ();
 				break;
 
 			//Player moves on the board 
 			case 3:
 				if (!rollADice.GetComponent<Canvas> ().isActiveAndEnabled) {
+				gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 					bc.HandleBoardEvent ();
-				//if (activePlayer.GetComponent<PlayerController> ().IsGameWon){
-						
-				//} else {
-						state = 4; 
-					//}
+				state = 4; 
 				}
 				break;
 
@@ -172,6 +169,7 @@ public class GameController : MonoBehaviour {
 					gameMenu.GetComponent<GameMenu> ().UpdateView ();
 				    gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 					if (activePlayer.GetComponent<PlayerController> ().IsGameWon) {
+						gameMenu.enabled = false;
 						endStory.enabled = true;
 					} else {
 						state = 10;
@@ -182,6 +180,7 @@ public class GameController : MonoBehaviour {
 
 			//FieldAction Movement
 			case 8:
+				
 				state = 11;
 				break;
 
@@ -193,8 +192,7 @@ public class GameController : MonoBehaviour {
 				break;
 
 			//next player or new round
-			case 10:
-				gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
+		case 10:
 				gameMenu.GetComponent<GameMenu> ().UpdateView ();
 				rollADice.enabled = false;
 				if (playerIDDice < orderOfPlayer.Length - 1) {
@@ -216,14 +214,15 @@ public class GameController : MonoBehaviour {
 
 			//Player one the game
 			case 12: 
-			   
+				
+				//SceneManager.LoadScene (0);
 				StartCoroutine (FinishGame ());
 				break;
 		}
 			
     }
 	protected IEnumerator FinishGame() {
-		yield return new WaitForSeconds (4.0f);
+		yield return new WaitForSeconds (2.0f);
 		endStory.enabled = false;
 		SceneManager.LoadScene (0);
 	}
@@ -300,10 +299,13 @@ public class GameController : MonoBehaviour {
 	*/
 	void PlayerDiceState() {
 		activePlayer = orderOfPlayer [playerIDDice];
+		gameMenu.GetComponent<GameMenu> ().DeactivateGameMessage ();
 		gameMenu.GetComponent<GameMenu> ().enabled = false;
 		rollADice.enabled = false;
 		if (activePlayer.GetComponent<PlayerController> ().IsDying) {
-			activePlayer.GetComponent<Movement> ().ProcessDying();	
+		    activePlayer.GetComponent<Movement> ().ProcessDying();
+			state = 11;
+			StartCoroutine (HighScoreState());
 		} 
 		if (!activePlayer.GetComponent<PlayerController> ().IsPlayerInBossBattleState ()) {
 			rollADice.enabled = true;

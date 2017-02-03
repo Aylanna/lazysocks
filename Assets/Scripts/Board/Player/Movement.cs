@@ -22,7 +22,6 @@ public class Movement : MonoBehaviour {
 	void Update() {
 		if (!move)
 			return;
-		//CheckForGoal ();
 		CheckBossBattle ();
 		Move ();
 		
@@ -33,24 +32,19 @@ public class Movement : MonoBehaviour {
 	 * Means the boss battle states are set to false.
 	 */
 	public void ProcessDying (){
+		GameController.Instance.gameMenu.GetComponent<GameMenu> ().SwitchGameMessage (7);
 		gameObject.GetComponent<PlayerController> ().IsDying = false;
 		currentWayPointID = 0;
 		transform.position = pathToFollow.pathObjs [currentWayPointID].position;
 		gameObject.GetComponent<PlayerController> ().BossBattle1 = false;
 		gameObject.GetComponent<PlayerController> ().BossBattle2 = false;
 		gameObject.GetComponent<PlayerController> ().BossBattle3 = false;
+		gameObject.GetComponent<PlayerController> ().Items = 0;
+		gameObject.GetComponent<PlayerController> ().SetHealedLeafSection1 ();
+		gameObject.GetComponent<PlayerController> ().SetHealedLeafSection2 ();
+		gameObject.GetComponent<PlayerController> ().SetHealedLeafSection3 ();
 	}
-
-	/**
-	 * If the player reached the goal he won the game. 
-	 */
-	void CheckForGoal() {
-		if (currentWayPointID >= bossBattle3 && gameObject.GetComponent<PlayerController> ().Items == 3) {
-			currentWayPointID = bossBattle3;
-			gameObject.GetComponent<PlayerController> ().IsGameWon = true;
-		}
-	}
-
+		
 	/**
 	 * If player the player is on boss battle field and lost it the current way point is set again to the boss battle field.
 	 */

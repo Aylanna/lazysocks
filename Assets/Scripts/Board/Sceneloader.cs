@@ -91,7 +91,7 @@ public class Sceneloader : MonoBehaviour {
 			GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().BossBattle1 = true;
 		if (GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().Items == 1)
 			GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().BossBattle2 = true;
-		if (GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().Items == 3)
+		if (GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().Items == 2)
 			GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().BossBattle3 = true;
 	}
 

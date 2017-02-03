@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class mamange the end story menu of the game.
+ * 
+ * @author Annkatrin Harms
+ */
 public class Endstory : MonoBehaviour {
 
 	public Canvas endStory;
@@ -31,13 +36,12 @@ public class Endstory : MonoBehaviour {
 	public void NextStory() {
 		if (clickIndex < stories.Length) {
 			endStory.GetComponentInChildren<Image> ().sprite = stories [clickIndex];
+			clickIndex++;
 			if (clickIndex == stories.Length - 1) {
 				winner.sprite = GameController.Instance.ActivePlayer.GetComponentInChildren<SpriteRenderer> ().sprite;
 				winner.enabled = true;
+				GameController.Instance.State = 12;
 			}
-			clickIndex++;
-		} else {
-			GameController.Instance.State = 12;
-		}
+		} 
 	}
 }

@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
+/**
+ * This class mamange the whole game whack a mole.
+ * 
+ * @author Annkatrin Harms
+ */
 public class WhackAMoleController : MonoBehaviour {
 
 	private int timerSeconds = 30;

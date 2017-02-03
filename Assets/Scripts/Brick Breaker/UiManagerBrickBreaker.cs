@@ -12,6 +12,8 @@ public class UiManagerBrickBreaker : MonoBehaviour {
     public GameObject storyEndPanel; 
 	public GameObject gameOverPanel;
 	private DestroyBrickBreaker scene;
+	public GameObject additiveScene;
+
 
 	public Text scoreText;
 	public Text gameOverScoreText;
@@ -21,8 +23,8 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 	private int score;
 	private int neededScore = 20;
 
-	public Sceneloader scl;
-	public bool extraLife;
+	private Sceneloader scl;
+	private bool extraLife;
 
 
 	// Use this for initialization
@@ -113,7 +115,11 @@ public class UiManagerBrickBreaker : MonoBehaviour {
         Pause();
 		//scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		//gameObject.SendMessage ("WashMe", 0, SendMessageOptions.DontRequireReceiver);
-		scene.DestroyScene ();
+		//scene.DestroyScene ();
+		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
+		scl.SetExtraLife(extraLife);
+		scl.UnLoadMinigame ();
+		Destroy (additiveScene);
 
 	}
 

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class mamange the start story menu of the game.
+ * 
+ * @author Annkatrin Harms
+ */
 public class Story : MonoBehaviour {
 
 	public Canvas story;

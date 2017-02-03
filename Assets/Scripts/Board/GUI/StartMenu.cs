@@ -21,11 +21,5 @@ public class StartMenu : MonoBehaviour {
 	public void StartGame() {
 		start.enabled = false;
 		numbersOfPlayer.enabled = true;
-
-	}
-
-	public void GameRules() {
-
-		//TODO
 	}
 }

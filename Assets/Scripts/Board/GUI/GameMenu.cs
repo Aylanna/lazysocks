@@ -23,6 +23,9 @@ public class GameMenu : MonoBehaviour {
 	public Sprite extralife;
 	public Sprite skip;
 	public Sprite minigame;
+	public Sprite gameOver;
+	public Sprite moveForward;
+	public Sprite moveBackward;
 	public Sprite sickFLower;
 	public Sprite healedLeafSection1s;
 	public Sprite healedLeafSection2s;
@@ -57,12 +60,27 @@ public class GameMenu : MonoBehaviour {
 	 * Manages which background needs to be activated for the active player.
 	 */
 	public void CheckBoardBackground() {
-		if(GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1())
+		if (!GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1 () &&
+		   !GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2 () &&
+		   !GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3 ()) {
+			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = sickFLower;
+		}
+
+		if (GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1 () &&
+			!GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2() &&
+		   !GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3 ()) {
 			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection1s;
-		if(GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2())
+		}
+		if (!GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1 () &&
+		   GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2 () &&
+		   !GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3 ()) {
 			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection2s;
-		if(GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3())
+		}
+		if (!GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection1 () &&
+		   !GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection2 () &&
+		   GameController.Instance.ActivePlayer.GetComponent<PlayerController> ().IsHealedLeafSection3 ()) {
 			boardBackground.GetComponentInChildren<SpriteRenderer> ().sprite = healedLeafSection3s;
+		}
 	}
 
 	/**
@@ -117,6 +135,15 @@ public class GameMenu : MonoBehaviour {
 			break;
 		case 4:
 			gameMessage.sprite = minigame;
+			break;
+		case 5:
+			gameMessage.sprite = moveForward;
+			break;
+		case 6:
+			gameMessage.sprite = moveBackward;
+			break;
+		case 7:
+			gameMessage.sprite = gameOver;
 			break;
 		}
 	}
