@@ -118,11 +118,11 @@ public class UIManagerT : MonoBehaviour
 	
 	public void BackToBoard()
 	{
-        Pause(); 
+        
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife (extralife);
 		scl.UnLoadMinigame ();
-
+        Time.timeScale = 1;
 		Destroy (additiveScene);
 		//Application.LoadLevel(Application.loadedLevel);
 	}

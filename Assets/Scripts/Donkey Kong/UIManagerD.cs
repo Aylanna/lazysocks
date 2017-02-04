@@ -94,12 +94,12 @@ public class UIManagerD : MonoBehaviour
 
 	public void BackToBoard()
 	{
-        Pause();
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (loseLifePoint);
 		scl.SetItem (item);
 		scl.SetPlayedBossBattle (true);
 		scl.UnLoadMinigame ();
+        Time.timeScale = 1; 
 		Destroy (additiveScene);
 	}
 }

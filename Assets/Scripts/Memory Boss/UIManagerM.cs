@@ -55,7 +55,7 @@ public class UIManagerM : MonoBehaviour
 	{
         Pause();
 		gameOver = true;
-		gameOverText.text = "You didnt defeat the boss and have no lives anymore :(";
+		gameOverText.text = "You didnt defeat the boss and didnt get the item, Try again!";
 		lifePoint = true;
 		gameOverPanel.SetActive(true);
 	}
@@ -92,12 +92,13 @@ public class UIManagerM : MonoBehaviour
 
 	public void BackToBoard()
 	{
-        Pause();
+        
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetLoseLifePoint (lifePoint);
 		scl.SetItem (item);
 		scl.SetPlayedBossBattle (true);
 		scl.UnLoadMinigame ();
 		Destroy (additiveScene);
-	}
+        Time.timeScale = 1; 
+    }
 }

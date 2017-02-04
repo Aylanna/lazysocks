@@ -112,13 +112,13 @@ public class UiManagerBrickBreaker : MonoBehaviour {
 
 	public void BackToBoard()
 	{
-        Pause();
 		//scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		//gameObject.SendMessage ("WashMe", 0, SendMessageOptions.DontRequireReceiver);
 		//scene.DestroyScene ();
 		scl = GameObject.Find("Sceneloader").GetComponent<Sceneloader> ();
 		scl.SetExtraLife(extraLife);
 		scl.UnLoadMinigame ();
+        Time.timeScale = 1;
 		Destroy (additiveScene);
 
 	}

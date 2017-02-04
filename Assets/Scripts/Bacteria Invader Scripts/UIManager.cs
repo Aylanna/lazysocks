@@ -98,7 +98,7 @@ public class UIManager : MonoBehaviour
 		scl.SetItem (item);
 		scl.SetPlayedBossBattle (true);
 		scl.UnLoadMinigame ();
-		Pause ();
+        Time.timeScale = 1; 
 		Destroy (additiveScene);
 	}
 }
